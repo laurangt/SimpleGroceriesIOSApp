@@ -8,19 +8,20 @@
 import SwiftUI
 
 struct SavedRecipesView: View {
+
+//    var savedrecipes: [LocalRecipe]
     
-    //TODO: Change for recipes saved
-    var groceryList = [
-        Grocery(ingredient: "Linguine", amount: 200, unit: "g"),
-        Grocery(ingredient: "Eggs", amount: 4, unit: ""),
-        Grocery(ingredient: "Pancetta", amount: 200, unit: "g")
+    var savedRecipes = [
+        SavedRecipeModel(name: "Recipe.name", servings: 2, cookingTime: "30min"),
+        SavedRecipeModel(name: "Recipe.name", servings: 2, cookingTime: "30min"),
+        SavedRecipeModel(name: "Recipe.name", servings: 2, cookingTime: "30min")
     ]
     
     //TODO: ondelete: delete
     var body: some View {
         NavigationStack{
             List{
-                ForEach(groceryList){ savedRecipe in
+                ForEach(savedRecipes){ savedRecipe in
                     SavedRecipeCell()
                 }.listRowSeparatorTint(Color("mainOrange"))
             }.navigationTitle("My saved Recipes")

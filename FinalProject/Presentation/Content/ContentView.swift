@@ -16,7 +16,7 @@ struct ContentView: View {
                 Text("My Groceries")
             }
             
-            RecipesView().tabItem {
+            RecipesView(recipesViewModel: RecipesViewModel(repository: RepositoryImpl(remoteDataSource: RemoteDataSourceImpl()))).tabItem {
                 Image(systemName: "magnifyingglass")
                 Text("Search Recipe")
             }

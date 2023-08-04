@@ -13,6 +13,7 @@ struct CheckboxView: View {
     var body: some View {
         Image(systemName: isChecked ? "checkmark.square.fill" : "square").onTapGesture {
             isChecked.toggle()
+            
         }
     }
 }

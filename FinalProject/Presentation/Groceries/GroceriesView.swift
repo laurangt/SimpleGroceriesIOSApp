@@ -8,13 +8,14 @@
 import SwiftUI
 
 struct GroceriesView: View {
+    // TODO: get actual grocerylist
     var groceryList = [
-        Grocery(ingredient: "Linguine", amount: 200, unit: "g"),
-        Grocery(ingredient: "Eggs", amount: 4, unit: ""),
-        Grocery(ingredient: "Pancetta", amount: 200, unit: "g"),
-        Grocery(ingredient: "Pesto", amount: 50, unit: "g"),
-        Grocery(ingredient: "Fusili", amount: 250, unit: "g"),
-        Grocery(ingredient: "Cheese", amount: 200, unit: "g")
+        GroceryModel(ingredient: "Linguine", amount: 200, unit: "g"),
+        GroceryModel(ingredient: "Eggs", amount: 4, unit: ""),
+        GroceryModel(ingredient: "Pancetta", amount: 200, unit: "g"),
+        GroceryModel(ingredient: "Pesto", amount: 50, unit: "g"),
+        GroceryModel(ingredient: "Fusili", amount: 250, unit: "g"),
+        GroceryModel(ingredient: "Cheese", amount: 200, unit: "g")
     ]
 
     var body: some View {
@@ -36,7 +37,7 @@ struct GroceriesView_Previews: PreviewProvider {
 
 // MARK: - Components
 struct GroceryCellView: View {
-    var grocery: Grocery
+    var grocery: GroceryModel
     @State private var isChecked = false
     
     var body: some View {
@@ -54,4 +55,3 @@ struct GroceryCellView: View {
         }
     }
 }
-
