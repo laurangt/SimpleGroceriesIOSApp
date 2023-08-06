@@ -11,6 +11,9 @@ struct SavedRecipesView: View {
     @ObservedObject var recipesViewModel: RecipesViewModel
 
     //TODO: from userdefaults savedRecipes display them here in init function
+    init(recipesViewModel: RecipesViewModel) {
+        self.recipesViewModel = recipesViewModel
+    }
     
     //TODO: ondelete: delete
     var body: some View {
@@ -19,7 +22,10 @@ struct SavedRecipesView: View {
                 ForEach(recipesViewModel.savedRecipes){ savedRecipe in
                     SavedRecipeCell(savedRecipe: savedRecipe)
                 }.listRowSeparatorTint(Color("mainOrange"))
-            }.navigationTitle("My saved Recipes")
+            }.onAppear(perform: {
+                recipesViewModel.readSelectedRecipesFromUserDefaults()
+            })
+            .navigationTitle("My saved Recipes")
         }
     }
 }

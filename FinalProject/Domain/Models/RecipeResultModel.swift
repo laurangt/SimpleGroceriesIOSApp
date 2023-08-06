@@ -22,8 +22,8 @@ struct RemoteRecipe: Codable {
     let cuisineType: [String]
 }
 
-struct LocalRecipe: Identifiable {
-    let id = UUID()
+struct LocalRecipe: Codable, Identifiable {
+    var id = UUID()
     var isSelected: Bool = false
     let remoteRecipe: RemoteRecipe
 }

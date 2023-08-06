@@ -28,4 +28,5 @@ final class RepositoryImpl: RepositoryProtocol {
             LocalRecipe(remoteRecipe: RemoteRecipe(label: $0.recipe.label, image: $0.recipe.image, ingredients: $0.recipe.ingredients, cuisineType: $0.recipe.cuisineType))
         }
     }
+    
 }

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D601114E2A7F8722003E57DF /* UserDefaultsHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D601114D2A7F8722003E57DF /* UserDefaultsHelper.swift */; };
 		D636DBAE2A7A9E6D00E348ED /* SplashView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D636DBAD2A7A9E6D00E348ED /* SplashView.swift */; };
 		D636DBBA2A7AABC400E348ED /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D636DBB92A7AABC300E348ED /* ContentView.swift */; };
 		D636DBBD2A7AAF9000E348ED /* RecipesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D636DBBC2A7AAF9000E348ED /* RecipesView.swift */; };
@@ -50,6 +51,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		D601114D2A7F8722003E57DF /* UserDefaultsHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsHelper.swift; sourceTree = "<group>"; };
 		D636DBAD2A7A9E6D00E348ED /* SplashView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashView.swift; sourceTree = "<group>"; };
 		D636DBB92A7AABC300E348ED /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		D636DBBC2A7AAF9000E348ED /* RecipesView.swift */ = {isa = PBXFileReference; indentWidth = 3; lastKnownFileType = sourcecode.swift; path = RecipesView.swift; sourceTree = "<group>"; };
@@ -279,6 +281,7 @@
 		D66FF49D2A7A7E09009E6050 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				D601114D2A7F8722003E57DF /* UserDefaultsHelper.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -466,6 +469,7 @@
 				D66BAF042A794A3E00159D7D /* FinalProjectApp.swift in Sources */,
 				D636DBD22A7BB90900E348ED /* RepositoryProtocol.swift in Sources */,
 				D66FF4E22A7A8233009E6050 /* GroceryModel.swift in Sources */,
+				D601114E2A7F8722003E57DF /* UserDefaultsHelper.swift in Sources */,
 				D636DBBD2A7AAF9000E348ED /* RecipesView.swift in Sources */,
 				D636DBD62A7BC18700E348ED /* RecipesViewModel.swift in Sources */,
 				D636DBC82A7B983600E348ED /* SavedRecipeModel.swift in Sources */,
