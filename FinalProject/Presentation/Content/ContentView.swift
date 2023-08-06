@@ -11,7 +11,7 @@ struct ContentView: View {
     var body: some View {
        
         TabView{
-            GroceriesView().tabItem {
+            GroceriesView(recipesViewModel: RecipesViewModel(repository: RepositoryImpl(remoteDataSource: RemoteDataSourceImpl()))).tabItem {
                 Image(systemName: "list.clipboard")
                 Text("My Groceries")
             }

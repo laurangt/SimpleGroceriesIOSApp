@@ -10,7 +10,7 @@ import SwiftUI
 struct SavedRecipesView: View {
     @ObservedObject var recipesViewModel: RecipesViewModel
 
-    //TODO: from userdefaults savedRecipes display them here in init function
+
     init(recipesViewModel: RecipesViewModel) {
         self.recipesViewModel = recipesViewModel
     }
@@ -22,7 +22,8 @@ struct SavedRecipesView: View {
                 ForEach(recipesViewModel.savedRecipes){ savedRecipe in
                     SavedRecipeCell(savedRecipe: savedRecipe)
                 }.listRowSeparatorTint(Color("mainOrange"))
-            }.onAppear(perform: {
+            }
+            .onAppear(perform: {
                 recipesViewModel.readSelectedRecipesFromUserDefaults()
             })
             .navigationTitle("My saved Recipes")

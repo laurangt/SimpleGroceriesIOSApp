@@ -20,6 +20,7 @@ final class UserDefaultsHelper {
     
     func readSavedRecipesFromUserDefaults() -> [LocalRecipe]{
         guard let data = UserDefaults.standard.data(forKey: "selectedRecipes"), let savedSelectedRecipes = try? JSONDecoder().decode([LocalRecipe].self, from: data) else {
+            print("data empty")
             return []
         }
         return savedSelectedRecipes

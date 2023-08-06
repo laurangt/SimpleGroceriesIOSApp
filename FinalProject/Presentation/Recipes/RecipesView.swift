@@ -43,7 +43,7 @@ struct RecipesView: View {
          Spacer()
          Button("Add to groceries") {
             // TODO: add ingredients to groceries
-            recipesViewModel.filterAndSaveSelectedRecipesToUserDefaults()
+            recipesViewModel.filterAndSaveSelectedRecipes()
             print("Add ingredients to my grocery list")
          }.frame(minHeight: 40).padding(EdgeInsets(top: 10, leading: 0, bottom: 40, trailing: 0)).buttonStyle(.borderedProminent)
             .tint(Color("mainOrange"))

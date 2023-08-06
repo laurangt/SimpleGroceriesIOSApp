@@ -28,21 +28,22 @@ final class RecipesViewModel: ObservableObject {
                 self.recipes = recipesFromApi
             }
         }
-//        readSelectedRecipesFromUserDefaults()
+        readSelectedRecipesFromUserDefaults()
     }
 
 //TODO: deselected if clicked on button and store in userdefautls to load them in savedRecipesView()
-    func filterAndSaveSelectedRecipesToUserDefaults(){
+    func filterAndSaveSelectedRecipes(){
         selectedRecipes = recipes.filter { $0.isSelected }
         print("SelectedRecipes: ")
-        selectedRecipes.forEach { rec in
-            print(rec.remoteRecipe.label)
+        selectedRecipes.forEach { recipe in
+            print(recipe.remoteRecipe.label)
+            addRecipeToSaved(recipe: recipe)
         }
-        UserDefaultsHelper.defaults.saveSelectedRecipesIntoUserDefaults(recipes: selectedRecipes)
+        saveSelectedRecipesToUserDefaults(recipes: selectedRecipes)
     }
     
-    func saveOnlyToUserDefaults(){
-        UserDefaultsHelper.defaults.saveSelectedRecipesIntoUserDefaults(recipes: selectedRecipes)
+    func saveSelectedRecipesToUserDefaults(recipes: [LocalRecipe]){
+        UserDefaultsHelper.defaults.saveSelectedRecipesIntoUserDefaults(recipes: recipes)
     }
     
     func readSelectedRecipesFromUserDefaults(){
@@ -52,7 +53,6 @@ final class RecipesViewModel: ObservableObject {
 //TODO: the saverecipes when restarting app is empty at beginning make sure it stays the same props first line
     func addRecipeToSaved(recipe: LocalRecipe) {
         savedRecipes.append(recipe)
-        saveOnlyToUserDefaults()
     }
     
 //TODO: add or remove from defaults savedarray

@@ -30,8 +30,8 @@ struct RecipeDetailView: View {
                 VStack(alignment: .leading){
                     Text("\(recipe.remoteRecipe.label)").font(.title2).fixedSize(horizontal: false, vertical: true).padding(EdgeInsets(top: 0, leading: 0, bottom: 4, trailing: 0))
                     Text("Ingredients").font(.title3).padding(4)
-                    ForEach(recipe.remoteRecipe.ingredients, id: \.text) { ingredient in
-                        Text("• \(ingredient.text)").fixedSize(horizontal: false, vertical: true)
+                    ForEach(recipe.remoteRecipe.ingredients, id: \.foodId) { ingredient in
+                        Text("• \(ingredient.food)").fixedSize(horizontal: false, vertical: true)
                     }
                     
                     //TODO: get pics

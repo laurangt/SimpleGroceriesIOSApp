@@ -18,7 +18,7 @@ struct RecipeModel: Codable{
 struct RemoteRecipe: Codable {
     let label: String
     let image: URL
-    let ingredients: [IngredientModel]
+    let ingredients: [Ingredient]
     let cuisineType: [String]
 }
 
@@ -28,9 +28,13 @@ struct LocalRecipe: Codable, Identifiable {
     let remoteRecipe: RemoteRecipe
 }
 
-struct IngredientModel: Codable {
-    let text: String
+struct Ingredient: Codable, Identifiable {
+    let food: String
+    let quantity: Float
+    var measure: String?
     let image: URL?
+    let foodId: String
+    var id: String { foodId }
 }
 
 

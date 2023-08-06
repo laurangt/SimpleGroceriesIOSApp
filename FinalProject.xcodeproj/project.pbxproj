@@ -14,7 +14,6 @@
 		D636DBBF2A7AB04400E348ED /* CheckboxView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D636DBBE2A7AB04400E348ED /* CheckboxView.swift */; };
 		D636DBC12A7AB25100E348ED /* RecipeResultModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D636DBC02A7AB25100E348ED /* RecipeResultModel.swift */; };
 		D636DBC42A7AC9D100E348ED /* SavedRecipesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D636DBC32A7AC9D100E348ED /* SavedRecipesView.swift */; };
-		D636DBC82A7B983600E348ED /* SavedRecipeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D636DBC72A7B983600E348ED /* SavedRecipeModel.swift */; };
 		D636DBCA2A7BB53100E348ED /* CircleLayoutPopupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D636DBC92A7BB53100E348ED /* CircleLayoutPopupView.swift */; };
 		D636DBCC2A7BB8EA00E348ED /* RepositoryImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = D636DBCB2A7BB8EA00E348ED /* RepositoryImpl.swift */; };
 		D636DBCE2A7BB8F500E348ED /* RemoteDataSourceImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = D636DBCD2A7BB8F500E348ED /* RemoteDataSourceImpl.swift */; };
@@ -58,7 +57,6 @@
 		D636DBBE2A7AB04400E348ED /* CheckboxView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckboxView.swift; sourceTree = "<group>"; };
 		D636DBC02A7AB25100E348ED /* RecipeResultModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeResultModel.swift; sourceTree = "<group>"; };
 		D636DBC32A7AC9D100E348ED /* SavedRecipesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedRecipesView.swift; sourceTree = "<group>"; };
-		D636DBC72A7B983600E348ED /* SavedRecipeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedRecipeModel.swift; sourceTree = "<group>"; };
 		D636DBC92A7BB53100E348ED /* CircleLayoutPopupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleLayoutPopupView.swift; sourceTree = "<group>"; };
 		D636DBCB2A7BB8EA00E348ED /* RepositoryImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositoryImpl.swift; sourceTree = "<group>"; };
 		D636DBCD2A7BB8F500E348ED /* RemoteDataSourceImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteDataSourceImpl.swift; sourceTree = "<group>"; };
@@ -258,7 +256,6 @@
 			children = (
 				D66FF4E12A7A8233009E6050 /* GroceryModel.swift */,
 				D636DBC02A7AB25100E348ED /* RecipeResultModel.swift */,
-				D636DBC72A7B983600E348ED /* SavedRecipeModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -472,7 +469,6 @@
 				D601114E2A7F8722003E57DF /* UserDefaultsHelper.swift in Sources */,
 				D636DBBD2A7AAF9000E348ED /* RecipesView.swift in Sources */,
 				D636DBD62A7BC18700E348ED /* RecipesViewModel.swift in Sources */,
-				D636DBC82A7B983600E348ED /* SavedRecipeModel.swift in Sources */,
 				D636DBCE2A7BB8F500E348ED /* RemoteDataSourceImpl.swift in Sources */,
 				D636DBBF2A7AB04400E348ED /* CheckboxView.swift in Sources */,
 				D636DBCA2A7BB53100E348ED /* CircleLayoutPopupView.swift in Sources */,

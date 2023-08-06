@@ -8,50 +8,60 @@
 import SwiftUI
 
 struct GroceriesView: View {
+    @ObservedObject var recipesViewModel: RecipesViewModel
+    
+    init(recipesViewModel: RecipesViewModel) {
+        self.recipesViewModel = recipesViewModel
+    }
+    
     // TODO: get actual grocerylist
-    var groceryList = [
-        GroceryModel(ingredient: "Linguine", amount: 200, unit: "g"),
-        GroceryModel(ingredient: "Eggs", amount: 4, unit: ""),
-        GroceryModel(ingredient: "Pancetta", amount: 200, unit: "g"),
-        GroceryModel(ingredient: "Pesto", amount: 50, unit: "g"),
-        GroceryModel(ingredient: "Fusili", amount: 250, unit: "g"),
-        GroceryModel(ingredient: "Cheese", amount: 200, unit: "g")
-    ]
-
     var body: some View {
         NavigationStack{
             List{
-                ForEach(groceryList){ grocery in
-                    GroceryCellView(grocery: grocery)
+                ForEach(recipesViewModel.savedRecipes){ recipe in
+                    GroceryCellView(recipe: recipe)
                 }.listRowSeparatorTint(Color("mainOrange"))
             }.navigationTitle("Groceries")
+                .onAppear {
+                    recipesViewModel.readSelectedRecipesFromUserDefaults()
+                }
         }
     }
 }
 
 struct GroceriesView_Previews: PreviewProvider {
     static var previews: some View {
-        GroceriesView()
+        GroceriesView(recipesViewModel: RecipesViewModel(repository: RepositoryImpl(remoteDataSource: RemoteDataSourceImpl())))
     }
 }
 
 // MARK: - Components
 struct GroceryCellView: View {
-    var grocery: GroceryModel
+    var recipe: LocalRecipe
     @State private var isChecked = false
     
     var body: some View {
-        HStack{
-            //TODO: change actual groceryState
-            Image(systemName: isChecked ? "checkmark.square.fill" : "square").foregroundColor(Color("mainOrange")).onTapGesture {
-                isChecked.toggle()
+        
+        //TODO: change actual groceryState and save to db
+        //TODO: checkbox for single item not all at once whe clicked
+        Section {
+            ForEach(recipe.remoteRecipe.ingredients){ grocery in
+                HStack{
+                    Image(systemName: isChecked ? "checkmark.square.fill" : "square").foregroundColor(Color("mainOrange")).onTapGesture {
+                        isChecked.toggle()
+                    }
+                    Text("\(grocery.food)")
+                    Spacer()
+                    HStack{
+                        Text("\(String(format: "%.2f", grocery.quantity))")
+                        Text("\(grocery.measure ?? "/")")
+                    }
+                }
             }
-            Text("\(grocery.ingredient)")
-            Spacer()
-            HStack{
-                Text("\(grocery.amount)")
-                Text("\(grocery.unit)")
-            }
+        } header: {
+            Text("\(recipe.remoteRecipe.label)")
         }
+
+        
     }
 }

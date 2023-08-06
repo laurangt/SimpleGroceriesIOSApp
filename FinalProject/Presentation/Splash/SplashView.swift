@@ -14,7 +14,7 @@ struct SplashView: View {
     var body: some View {
         ZStack {
             if self.isActive {
-                GroceriesView()
+                GroceriesView(recipesViewModel: RecipesViewModel(repository: RepositoryImpl(remoteDataSource: RemoteDataSourceImpl())))
             } else {
                 Text("hi this is splash")
             }
