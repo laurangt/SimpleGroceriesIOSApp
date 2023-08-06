@@ -23,8 +23,8 @@ struct RemoteRecipe: Codable {
 }
 
 struct LocalRecipe: Identifiable {
-    let id: UUID
-    let selected: Bool = false
+    let id = UUID()
+    var isSelected: Bool = false
     let remoteRecipe: RemoteRecipe
 }
 
@@ -32,4 +32,5 @@ struct IngredientModel: Codable {
     let text: String
     let image: URL?
 }
+
 

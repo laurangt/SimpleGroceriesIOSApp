@@ -17,21 +17,22 @@ enum NetworkError: Error, Equatable {
 final class RemoteDataSourceImpl: RemoteDataSourceProtocol {
     
     private let session = URLSession.shared
-    private let server: String = "https://edamam-recipe-search.p.rapidapi.com/search"
+    private let server: String = "https://api.edamam.com/api/recipes/v2?type=public&q=pasta&app_id=c6d3b936&app_key=d2bbffebefefdb3b3a52cca3845e91a4"
         
     func getRecipes(query: String) async throws -> [RecipeModel]?{
-        guard let url = URL(string: "\(server)?q=\(query)") else {
+        guard let url = URL(string: "\(server)") else {
             throw NetworkError.malformedURL
         }
 
         // URL request
         var urlRequest = URLRequest(url: url)
-        print(
-            urlRequest.description
-        )
+        
         urlRequest.httpMethod = "GET"
-        urlRequest.setValue("b1709d4d0dmsh68fa8db1532279ep1d532djsn4dd769eb03ca", forHTTPHeaderField: "X-RapidAPI-Key")
-
+//        urlRequest.setValue("d2bbffebefefdb3b3a52cca3845e91a4", forHTTPHeaderField: "app_key")
+//        urlRequest.setValue("c6d3b936", forHTTPHeaderField: "app_id")
+//        print(
+//            urlRequest.description
+//        )
 
         // Obetener la data de la llamada
         do {
@@ -42,7 +43,7 @@ final class RemoteDataSourceImpl: RemoteDataSourceProtocol {
             }
             
             let decodedData = try JSONDecoder().decode(RecipeResultModel.self, from: data)
-            print(decodedData)
+//            print(decodedData)
             return decodedData.hits
         } catch (let error){
             print(error)

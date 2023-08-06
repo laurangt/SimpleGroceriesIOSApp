@@ -21,7 +21,7 @@ struct ContentView: View {
                 Text("Search Recipe")
             }
             
-            SavedRecipesView().tabItem {
+            SavedRecipesView(recipesViewModel: RecipesViewModel(repository: RepositoryImpl(remoteDataSource: RemoteDataSourceImpl()))).tabItem {
                 Image(systemName: "bookmark.fill")
                 Text("Saved recipes")
             }

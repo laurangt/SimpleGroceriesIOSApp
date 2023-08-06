@@ -8,18 +8,20 @@
 import SwiftUI
 
 struct CheckboxView: View {
-    @State private var isChecked = false
+    @Binding var isChecked: Bool
 
     var body: some View {
-        Image(systemName: isChecked ? "checkmark.square.fill" : "square").onTapGesture {
+        Image(systemName: isChecked ? "checkmark.square.fill" : "square")
+            
+            .onTapGesture {
             isChecked.toggle()
             
         }
     }
 }
-
-struct CheckboxView_Previews: PreviewProvider {
-    static var previews: some View {
-        CheckboxView()
-    }
-}
+//
+//struct CheckboxView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        CheckboxView(isChecked: false)
+//    }
+//}

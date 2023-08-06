@@ -11,7 +11,8 @@ final class RecipesViewModel: ObservableObject {
     private let repository: RepositoryProtocol
                                           
     @Published var recipes: [LocalRecipe] = []
-
+    @Published var savedRecipes: [LocalRecipe] = []
+    
     init(repository: RepositoryProtocol) {
         self.repository = repository
 
@@ -27,8 +28,15 @@ final class RecipesViewModel: ObservableObject {
             }
         }
     }
+
+//TODO: deselected if clicked on button and store in userdefautls to load them in savedRecipesView()
+    func saveSelectedRecipes(){
+        savedRecipes = recipes.filter { $0.isSelected }
+        print("SelectedRecipes: ")
+        savedRecipes.forEach { rec in
+            print(rec.remoteRecipe.label)
+        }
+    }
     
-//    func addRecipeToSaved(selectedRecipes: [LocalRecipe]){
-//
-//    }
+    
 }

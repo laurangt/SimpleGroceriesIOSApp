@@ -10,6 +10,7 @@ import SwiftUI
 struct RecipesView: View {
    //TODO: Change to recipe api and create model
    @ObservedObject var recipesViewModel: RecipesViewModel
+//   @State var savedRecipes: [LocalRecipe] = []
    
    init(recipesViewModel: RecipesViewModel) {
       self.recipesViewModel = recipesViewModel
@@ -27,13 +28,11 @@ struct RecipesView: View {
             VStack {
                ScrollView {
                   LazyVGrid(columns: columns) {
-                     ForEach(recipesViewModel.recipes){ recipe in
-                        NavigationLink {
-                           RecipeDetailView(recipe: recipe)
-                        } label: {
-                           RecipeComponent(recipe: recipe)
-
-                        }
+                     ForEach(recipesViewModel.recipes.indices, id: \.self){ index in
+//                        NavigationLink {
+//                           RecipeDetailView(recipe: recipe)
+//                        } label: {
+                        RecipeComponent(recipe: $recipesViewModel.recipes[index])
                      }
                   }
                }
@@ -44,6 +43,7 @@ struct RecipesView: View {
          Spacer()
          Button("Add to groceries") {
             // TODO: add ingredients to groceries
+            recipesViewModel.saveSelectedRecipes()
             print("Add ingredients to my grocery list")
          }.frame(minHeight: 40).padding(EdgeInsets(top: 10, leading: 0, bottom: 40, trailing: 0)).buttonStyle(.borderedProminent)
             .tint(Color("mainOrange"))
@@ -62,7 +62,8 @@ struct RecipesView_Previews: PreviewProvider {
 
 
 struct RecipeComponent: View {
-   var recipe: LocalRecipe
+
+   @Binding var recipe: LocalRecipe
    
    var body: some View {
       ZStack {
@@ -76,12 +77,15 @@ struct RecipeComponent: View {
                        placeholder: {
                Image("foodPlaceholder")
             })
+            
             HStack(alignment: .center){
                Text("\(recipe.remoteRecipe.label)").foregroundColor(.black).lineLimit(2).padding(3)
-               CheckboxView().foregroundColor(Color("mainOrange"))
+               CheckboxView(isChecked: $recipe.isSelected)
             }
             Spacer()
          }
       }.frame(width: 160, height: 170).shadow(radius: 5).cornerRadius(10)
    }
 }
+
+

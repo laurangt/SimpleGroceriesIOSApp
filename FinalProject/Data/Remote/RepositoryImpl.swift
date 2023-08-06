@@ -15,6 +15,7 @@ final class RepositoryImpl: RepositoryProtocol {
         self.remoteDataSource = remoteDataSource
     }
     
+    // MARK: recipes Api methods
     func getRecipes(query: String) async throws -> [LocalRecipe]? {
         guard let remoteRecipeData = try? await remoteDataSource.getRecipes(query: query) else {
             return []
@@ -24,12 +25,7 @@ final class RepositoryImpl: RepositoryProtocol {
     
     func mapperLocalRecipes(recipes: [RecipeModel]) -> [LocalRecipe] {
         return recipes.map {
-            LocalRecipe(id: UUID(), remoteRecipe: RemoteRecipe(label: $0.recipe.label, image: $0.recipe.image, ingredients: $0.recipe.ingredients, cuisineType: $0.recipe.cuisineType))
+            LocalRecipe(remoteRecipe: RemoteRecipe(label: $0.recipe.label, image: $0.recipe.image, ingredients: $0.recipe.ingredients, cuisineType: $0.recipe.cuisineType))
         }
     }
-    
-    
-    
-    
-    
 }
