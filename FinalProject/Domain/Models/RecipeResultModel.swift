@@ -18,14 +18,14 @@ struct RecipeModel: Codable{
 struct RemoteRecipe: Codable {
     let label: String
     let image: URL
-    let ingredients: [Ingredient]
+    var ingredients: [Ingredient]
     let cuisineType: [String]
 }
 
 struct LocalRecipe: Codable, Identifiable {
     var id = UUID()
     var isSelected: Bool = false
-    let remoteRecipe: RemoteRecipe
+    var remoteRecipe: RemoteRecipe
 }
 
 struct Ingredient: Codable, Identifiable {
@@ -34,6 +34,7 @@ struct Ingredient: Codable, Identifiable {
     var measure: String?
     let image: URL?
     let foodId: String
+    //TODO: id same if food multiple itme or ingredient multiple time
     var id: String { foodId }
 }
 

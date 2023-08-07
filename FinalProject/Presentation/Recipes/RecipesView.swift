@@ -29,10 +29,11 @@ struct RecipesView: View {
                ScrollView {
                   LazyVGrid(columns: columns) {
                      ForEach(recipesViewModel.recipes.indices, id: \.self){ index in
-//                        NavigationLink {
-//                           RecipeDetailView(recipe: recipe)
-//                        } label: {
-                        RecipeComponent(recipe: $recipesViewModel.recipes[index])
+                        NavigationLink {
+                           RecipeDetailView(recipe: recipesViewModel.recipes[index])
+                        } label: {
+                           RecipeComponent(recipe: $recipesViewModel.recipes[index])
+                        }
                      }
                   }
                }
@@ -80,7 +81,7 @@ struct RecipeComponent: View {
             
             HStack(alignment: .center){
                Text("\(recipe.remoteRecipe.label)").foregroundColor(.black).lineLimit(2).padding(3)
-               CheckboxView(isChecked: $recipe.isSelected)
+               CheckboxView(isChecked: $recipe.isSelected).foregroundColor(Color("mainOrange"))
             }
             Spacer()
          }

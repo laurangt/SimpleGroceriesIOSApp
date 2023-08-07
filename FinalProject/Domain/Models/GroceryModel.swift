@@ -9,8 +9,6 @@ import Foundation
 
 struct GroceryModel: Decodable, Identifiable  {
     var id = UUID()
-    let ingredient: String
-    let amount: Int
-    let unit: String
-    var done: Bool = false
+    let ingredient: Ingredient
+    var isCompleted: Bool = false
 }

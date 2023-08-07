@@ -43,7 +43,8 @@ struct SavedRecipeCell: View{
     
     var body: some View {
         HStack{
-            Image("carbonara").resizable().frame(width: 100, height: 80).cornerRadius(15).scaledToFit()
+            //TODO: image default or see whats up
+            Image("\(savedRecipe.remoteRecipe.image)").resizable().frame(width: 100, height: 80).cornerRadius(15).scaledToFit()
             VStack{
                 Text("\(savedRecipe.remoteRecipe.label)")
             }
