@@ -17,9 +17,10 @@ enum NetworkError: Error, Equatable {
 final class RemoteDataSourceImpl: RemoteDataSourceProtocol {
     
     private let session = URLSession.shared
-    private let server: String = "https://api.edamam.com/api/recipes/v2?type=public&q=pasta&app_id=c6d3b936&app_key=d2bbffebefefdb3b3a52cca3845e91a4"
         
     func getRecipes(query: String) async throws -> [RecipeModel]?{
+        let server: String = "https://api.edamam.com/api/recipes/v2?type=public&q=\(query)&app_id=c6d3b936&app_key=d2bbffebefefdb3b3a52cca3845e91a4"
+
         guard let url = URL(string: "\(server)") else {
             throw NetworkError.malformedURL
         }
@@ -28,11 +29,12 @@ final class RemoteDataSourceImpl: RemoteDataSourceProtocol {
         var urlRequest = URLRequest(url: url)
         
         urlRequest.httpMethod = "GET"
+        
 //        urlRequest.setValue("d2bbffebefefdb3b3a52cca3845e91a4", forHTTPHeaderField: "app_key")
 //        urlRequest.setValue("c6d3b936", forHTTPHeaderField: "app_id")
-//        print(
-//            urlRequest.description
-//        )
+        print(
+            urlRequest.description
+        )
 
         // Obetener la data de la llamada
         do {

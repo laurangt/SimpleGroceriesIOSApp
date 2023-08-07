@@ -11,6 +11,7 @@ struct RecipesView: View {
    //TODO: Change to recipe api and create model
    @ObservedObject var recipesViewModel: RecipesViewModel
 //   @State var savedRecipes: [LocalRecipe] = []
+   @State private var recipeQuery = ""
    
    init(recipesViewModel: RecipesViewModel) {
       self.recipesViewModel = recipesViewModel
@@ -37,6 +38,15 @@ struct RecipesView: View {
                      }
                   }
                }
+               .searchable(text: $recipeQuery, prompt: "Search recipe")
+               .onSubmit(of: .search) {
+                  Task {
+                     if !recipeQuery.isEmpty {
+                        await recipesViewModel.searchRecipes(query: recipeQuery.lowercased())
+                     }
+                  }
+                  
+               }
             }
             .padding()
          }.navigationTitle("Categorie.title")
@@ -44,8 +54,8 @@ struct RecipesView: View {
          Spacer()
          Button("Add to groceries") {
             // TODO: add ingredients to groceries
-            recipesViewModel.filterAndSaveSelectedRecipes()
             print("Add ingredients to my grocery list")
+            recipesViewModel.filterAndSaveSelectedRecipes()
          }.frame(minHeight: 40).padding(EdgeInsets(top: 10, leading: 0, bottom: 40, trailing: 0)).buttonStyle(.borderedProminent)
             .tint(Color("mainOrange"))
       }

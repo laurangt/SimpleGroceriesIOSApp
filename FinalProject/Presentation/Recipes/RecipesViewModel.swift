@@ -13,46 +13,74 @@ final class RecipesViewModel: ObservableObject {
     @Published var recipes: [LocalRecipe] = []
     @Published var selectedRecipes: [LocalRecipe] = []
     @Published var savedRecipes: [LocalRecipe] = []
+   
     
     init(repository: RepositoryProtocol) {
         self.repository = repository
 
-        DispatchQueue.main.async {
             Task {
-                //TODO: change query to category
-                guard let recipesFromApi = try? await repository.getRecipes(query: "pasta") else {
-                    self.recipes = []
-                    print("Unable to get recipes from api")
-                    return
-                }
-                self.recipes = recipesFromApi
+                //TODO: change query to category if using popup or do popup as defualt instead of pasta
+                await self.searchRecipes(query: "pasta")
             }
+        
+        loadSavedRecipesFromUserDefaults()
+        
+        savedRecipes.forEach { re in
+            print("init")
+            print(re.remoteRecipe.label)
         }
-        readSelectedRecipesFromUserDefaults()
     }
 
+    func searchRecipes(query: String) async {
+        guard let recipesFromApi = try? await repository.getRecipes(query: query) else {
+            self.recipes = []
+            print("Unable to get recipes from api")
+            return
+        }
+        
+        //TODO: fix purple error
+        DispatchQueue.main.async {
+            self.recipes = recipesFromApi
+        }
+        //TODO: needed?
+        loadSavedRecipesFromUserDefaults()
+        print("search")
+        savedRecipes.forEach { re in
+            print(re.remoteRecipe.label)
+        }
+    }
+    
 //TODO: deselected if clicked on button and store in userdefautls to load them in savedRecipesView()
     func filterAndSaveSelectedRecipes(){
         selectedRecipes = recipes.filter { $0.isSelected }
-        print("SelectedRecipes: ")
+       
         selectedRecipes.forEach { recipe in
             print(recipe.remoteRecipe.label)
             addRecipeToSaved(recipe: recipe)
         }
-        saveSelectedRecipesToUserDefaults(recipes: selectedRecipes)
+        saveSelectedRecipesToUserDefaults(recipes: savedRecipes)
+        loadSavedRecipesFromUserDefaults()
+
     }
     
     func saveSelectedRecipesToUserDefaults(recipes: [LocalRecipe]){
         UserDefaultsHelper.defaults.saveSelectedRecipesIntoUserDefaults(recipes: recipes)
     }
     
-    func readSelectedRecipesFromUserDefaults(){
-        savedRecipes = UserDefaultsHelper.defaults.readSavedRecipesFromUserDefaults()
+    func loadSavedRecipesFromUserDefaults(){
+        DispatchQueue.main.async {
+            self.savedRecipes = UserDefaultsHelper.defaults.readSavedRecipesFromUserDefaults()
+            print("loaodfromuser")
+            self.savedRecipes.forEach { re in
+                print(re.remoteRecipe.label)
+            }
+        }
     }
     
 //TODO: the saverecipes when restarting app is empty at beginning make sure it stays the same props first line
     func addRecipeToSaved(recipe: LocalRecipe) {
         savedRecipes.append(recipe)
+        loadSavedRecipesFromUserDefaults()
     }
     
 //TODO: add or remove from defaults savedarray
@@ -63,4 +91,6 @@ final class RecipesViewModel: ObservableObject {
 //        }
 //    }
 }
+
+
 

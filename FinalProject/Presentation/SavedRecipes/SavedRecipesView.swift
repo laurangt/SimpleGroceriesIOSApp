@@ -13,6 +13,7 @@ struct SavedRecipesView: View {
 
     init(recipesViewModel: RecipesViewModel) {
         self.recipesViewModel = recipesViewModel
+        recipesViewModel.loadSavedRecipesFromUserDefaults()
     }
     
     //TODO: ondelete: delete
@@ -24,7 +25,7 @@ struct SavedRecipesView: View {
                 }.listRowSeparatorTint(Color("mainOrange"))
             }
             .onAppear(perform: {
-                recipesViewModel.readSelectedRecipesFromUserDefaults()
+                recipesViewModel.loadSavedRecipesFromUserDefaults()
             })
             .navigationTitle("My saved Recipes")
         }

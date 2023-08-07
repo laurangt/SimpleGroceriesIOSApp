@@ -24,7 +24,7 @@ struct GroceriesView: View {
                 .listRowSeparatorTint(Color("mainOrange"))
             }.navigationTitle("Groceries")
                 .onAppear {
-                    recipesViewModel.readSelectedRecipesFromUserDefaults()
+                    recipesViewModel.loadSavedRecipesFromUserDefaults()
                 }
         }
     }

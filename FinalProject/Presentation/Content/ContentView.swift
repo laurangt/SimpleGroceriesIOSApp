@@ -11,10 +11,10 @@ struct ContentView: View {
     var body: some View {
        
         TabView{
-            GroceriesView(recipesViewModel: RecipesViewModel(repository: RepositoryImpl(remoteDataSource: RemoteDataSourceImpl()))).tabItem {
-                Image(systemName: "list.clipboard")
-                Text("My Groceries")
-            }
+//            GroceriesView(recipesViewModel: RecipesViewModel(repository: RepositoryImpl(remoteDataSource: RemoteDataSourceImpl()))).tabItem {
+//                Image(systemName: "list.clipboard")
+//                Text("My Groceries")
+//            }
             
             RecipesView(recipesViewModel: RecipesViewModel(repository: RepositoryImpl(remoteDataSource: RemoteDataSourceImpl()))).tabItem {
                 Image(systemName: "magnifyingglass")
