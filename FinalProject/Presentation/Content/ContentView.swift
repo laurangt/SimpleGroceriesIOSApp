@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct ContentView: View {
+    let viewmodel = RecipesViewModel(repository: RepositoryImpl(remoteDataSource: RemoteDataSourceImpl()))
+    
     var body: some View {
        
         TabView{
@@ -16,12 +18,12 @@ struct ContentView: View {
 //                Text("My Groceries")
 //            }
             
-            RecipesView(recipesViewModel: RecipesViewModel(repository: RepositoryImpl(remoteDataSource: RemoteDataSourceImpl()))).tabItem {
+            RecipesView(recipesViewModel: viewmodel).tabItem {
                 Image(systemName: "magnifyingglass")
                 Text("Search Recipe")
             }
             
-            SavedRecipesView(recipesViewModel: RecipesViewModel(repository: RepositoryImpl(remoteDataSource: RemoteDataSourceImpl()))).tabItem {
+            SavedRecipesView(recipesViewModel: viewmodel).tabItem {
                 Image(systemName: "bookmark.fill")
                 Text("Saved recipes")
             }

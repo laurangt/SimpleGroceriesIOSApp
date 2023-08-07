@@ -10,7 +10,8 @@ import SwiftUI
 struct SavedRecipesView: View {
     @ObservedObject var recipesViewModel: RecipesViewModel
 
-
+//TODO: click on recipe in saved to get details view
+    //TODO: load picture and make load not default pic spinner
     init(recipesViewModel: RecipesViewModel) {
         self.recipesViewModel = recipesViewModel
         recipesViewModel.loadSavedRecipesFromUserDefaults()
@@ -22,7 +23,9 @@ struct SavedRecipesView: View {
             List{
                 ForEach(recipesViewModel.savedRecipes){ savedRecipe in
                     SavedRecipeCell(savedRecipe: savedRecipe)
-                }.listRowSeparatorTint(Color("mainOrange"))
+                }
+                .onDelete(perform: recipesViewModel.deleteSavedRecipe)
+                .listRowSeparatorTint(Color("mainOrange"))
             }
             .onAppear(perform: {
                 recipesViewModel.loadSavedRecipesFromUserDefaults()
@@ -45,10 +48,15 @@ struct SavedRecipeCell: View{
     var body: some View {
         HStack{
             //TODO: image default or see whats up
-            Image("\(savedRecipe.remoteRecipe.image)").resizable().frame(width: 100, height: 80).cornerRadius(15).scaledToFit()
-            VStack{
-                Text("\(savedRecipe.remoteRecipe.label)")
-            }
+            AsyncImage(url: URL(string: "\(savedRecipe.remoteRecipe.image)"),
+                       content: { image in
+               image.resizable()
+                  .aspectRatio(contentMode: .fill)
+                  .frame(width: 100, height: 80).cornerRadius(15).scaledToFit()
+            }, placeholder: {
+               Image("foodPlaceholder")
+            })
+            Text("\(savedRecipe.remoteRecipe.label)")
         }
     }
 }

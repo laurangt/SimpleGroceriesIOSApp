@@ -24,11 +24,6 @@ final class RecipesViewModel: ObservableObject {
             }
         
         loadSavedRecipesFromUserDefaults()
-        
-        savedRecipes.forEach { re in
-            print("init")
-            print(re.remoteRecipe.label)
-        }
     }
 
     func searchRecipes(query: String) async {
@@ -38,29 +33,17 @@ final class RecipesViewModel: ObservableObject {
             return
         }
         
-        //TODO: fix purple error
         DispatchQueue.main.async {
             self.recipes = recipesFromApi
-        }
-        //TODO: needed?
-        loadSavedRecipesFromUserDefaults()
-        print("search")
-        savedRecipes.forEach { re in
-            print(re.remoteRecipe.label)
         }
     }
     
 //TODO: deselected if clicked on button and store in userdefautls to load them in savedRecipesView()
     func filterAndSaveSelectedRecipes(){
         selectedRecipes = recipes.filter { $0.isSelected }
-       
         selectedRecipes.forEach { recipe in
-            print(recipe.remoteRecipe.label)
             addRecipeToSaved(recipe: recipe)
         }
-        saveSelectedRecipesToUserDefaults(recipes: savedRecipes)
-        loadSavedRecipesFromUserDefaults()
-
     }
     
     func saveSelectedRecipesToUserDefaults(recipes: [LocalRecipe]){
@@ -70,26 +53,20 @@ final class RecipesViewModel: ObservableObject {
     func loadSavedRecipesFromUserDefaults(){
         DispatchQueue.main.async {
             self.savedRecipes = UserDefaultsHelper.defaults.readSavedRecipesFromUserDefaults()
-            print("loaodfromuser")
-            self.savedRecipes.forEach { re in
-                print(re.remoteRecipe.label)
-            }
         }
     }
     
-//TODO: the saverecipes when restarting app is empty at beginning make sure it stays the same props first line
     func addRecipeToSaved(recipe: LocalRecipe) {
-        savedRecipes.append(recipe)
         loadSavedRecipesFromUserDefaults()
+        savedRecipes.append(recipe)
+        saveSelectedRecipesToUserDefaults(recipes: savedRecipes)
     }
+
     
-//TODO: add or remove from defaults savedarray
-//    func removeRecipeFromSaved(recipe: LocalRecipe) {
-//        if let index = savedRecipes.firstIndex(where: {$0.id == recipe.id}) {
-//            savedRecipes.remove(at: index)
-//            saveSelectedRecipesToUserDefaults()
-//        }
-//    }
+    func deleteSavedRecipe(at offsets: IndexSet){
+        savedRecipes.remove(atOffsets: offsets)
+        saveSelectedRecipesToUserDefaults(recipes: savedRecipes)
+    }
 }
 
 

@@ -8,9 +8,7 @@
 import SwiftUI
 
 struct RecipesView: View {
-   //TODO: Change to recipe api and create model
    @ObservedObject var recipesViewModel: RecipesViewModel
-//   @State var savedRecipes: [LocalRecipe] = []
    @State private var recipeQuery = ""
    
    init(recipesViewModel: RecipesViewModel) {
@@ -49,13 +47,15 @@ struct RecipesView: View {
                }
             }
             .padding()
-         }.navigationTitle("Categorie.title")
+            //TODO: if categoreis change title to category
+         }.navigationTitle("Recipes")
             .navigationBarTitleDisplayMode(.inline)
          Spacer()
-         Button("Add to groceries") {
+         Button("Save recipes") {
             // TODO: add ingredients to groceries
             print("Add ingredients to my grocery list")
             recipesViewModel.filterAndSaveSelectedRecipes()
+            // TODO: deselect selctedrecipes after added
          }.frame(minHeight: 40).padding(EdgeInsets(top: 10, leading: 0, bottom: 40, trailing: 0)).buttonStyle(.borderedProminent)
             .tint(Color("mainOrange"))
       }
