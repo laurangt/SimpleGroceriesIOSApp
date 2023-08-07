@@ -20,11 +20,9 @@ struct RecipeDetailView: View {
                   .cornerRadius(15)
             },
                        placeholder: {
-                Image("foodPlaceholder").resizable()
-                    .aspectRatio(contentMode: .fill)
-                    .frame(height: 300)
+                ProgressView().frame(height: 300)
                     .cornerRadius(15)
-            })
+            }).accessibilityAddTraits(.isImage).accessibilityLabel("Image of recipe")
             
             ScrollView {
                 VStack(alignment: .leading){

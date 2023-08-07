@@ -36,7 +36,7 @@ struct RecipesView: View {
                      }
                   }
                }
-               .searchable(text: $recipeQuery, prompt: "Search recipe")
+               .searchable(text: $recipeQuery, prompt: "Search recipe").accessibilityLabel("search recipe").accessibilityAddTraits(.isSearchField)
                .onSubmit(of: .search) {
                   Task {
                      if !recipeQuery.isEmpty {
@@ -56,8 +56,12 @@ struct RecipesView: View {
             print("Add ingredients to my grocery list")
             recipesViewModel.filterAndSaveSelectedRecipes()
             // TODO: deselect selctedrecipes after added
-         }.frame(minHeight: 40).padding(EdgeInsets(top: 10, leading: 0, bottom: 40, trailing: 0)).buttonStyle(.borderedProminent)
-            .tint(Color("mainOrange"))
+         }
+         .frame(minHeight: 40)
+         .padding(EdgeInsets(top: 10, leading: 0, bottom: 40, trailing: 0)).buttonStyle(.borderedProminent)
+         .tint(Color("mainOrange"))
+         .accessibilityLabel("Submit button: Save selected Recipes")
+         .accessibilityAddTraits(.isButton)
       }
       
    }
@@ -86,8 +90,8 @@ struct RecipeComponent: View {
                   .frame(width: 170, height: 110).cornerRadius(15).scaledToFit()
             },
                        placeholder: {
-               Image("foodPlaceholder")
-            })
+               ProgressView().frame(width: 170, height: 110)
+            }).accessibilityAddTraits(.isImage).accessibilityLabel("Image of recipe")
             
             HStack(alignment: .center){
                Text("\(recipe.remoteRecipe.label)").foregroundColor(.black).lineLimit(2).padding(3)

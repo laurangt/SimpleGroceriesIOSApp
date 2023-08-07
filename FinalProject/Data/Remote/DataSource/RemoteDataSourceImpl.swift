@@ -39,13 +39,11 @@ final class RemoteDataSourceImpl: RemoteDataSourceProtocol {
         // Obetener la data de la llamada
         do {
             let (data, response) = try await session.data(for: urlRequest)
-            
             guard let response = response as? HTTPURLResponse, response.statusCode == 200 else {
                 throw NetworkError.invalidResponse
             }
             
             let decodedData = try JSONDecoder().decode(RecipeResultModel.self, from: data)
-//            print(decodedData)
             return decodedData.hits
         } catch (let error){
             print(error)

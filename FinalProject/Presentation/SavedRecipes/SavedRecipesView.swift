@@ -10,19 +10,22 @@ import SwiftUI
 struct SavedRecipesView: View {
     @ObservedObject var recipesViewModel: RecipesViewModel
 
-//TODO: click on recipe in saved to get details view
+    //TODO: click on recipe in saved to get details view
     //TODO: load picture and make load not default pic spinner
     init(recipesViewModel: RecipesViewModel) {
         self.recipesViewModel = recipesViewModel
         recipesViewModel.loadSavedRecipesFromUserDefaults()
     }
     
-    //TODO: ondelete: delete
     var body: some View {
         NavigationStack{
             List{
                 ForEach(recipesViewModel.savedRecipes){ savedRecipe in
-                    SavedRecipeCell(savedRecipe: savedRecipe)
+                    NavigationLink {
+                       RecipeDetailView(recipe: savedRecipe)
+                    } label: {
+                        SavedRecipeCell(savedRecipe: savedRecipe)
+                    }
                 }
                 .onDelete(perform: recipesViewModel.deleteSavedRecipe)
                 .listRowSeparatorTint(Color("mainOrange"))
@@ -52,10 +55,11 @@ struct SavedRecipeCell: View{
                        content: { image in
                image.resizable()
                   .aspectRatio(contentMode: .fill)
-                  .frame(width: 100, height: 80).cornerRadius(15).scaledToFit()
+                  .frame(width: 100, height: 80)
+                  .cornerRadius(15)
             }, placeholder: {
-               Image("foodPlaceholder")
-            })
+               ProgressView().frame(width: 100, height: 80)
+            }).accessibilityAddTraits(.isImage).accessibilityLabel("Image of recipe")
             Text("\(savedRecipe.remoteRecipe.label)")
         }
     }

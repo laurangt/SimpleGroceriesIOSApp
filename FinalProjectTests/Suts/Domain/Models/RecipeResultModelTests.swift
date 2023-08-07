@@ -1,14 +1,13 @@
 //
-//  FinalProjectTests.swift
+//  RecipeResultModelTests.swift
 //  FinalProjectTests
 //
-//  Created by Nguyen-Trong Laura on 1/8/23.
+//  Created by Nguyen-Trong Laura on 7/8/23.
 //
 
 import XCTest
-@testable import FinalProject
 
-final class FinalProjectTests: XCTestCase {
+final class RecipeResultModelTests: XCTestCase {
 
     override func setUpWithError() throws {
         // Put setup code here. This method is called before the invocation of each test method in the class.
