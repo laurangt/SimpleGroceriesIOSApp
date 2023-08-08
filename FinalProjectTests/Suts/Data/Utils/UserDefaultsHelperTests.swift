@@ -11,7 +11,7 @@ import XCTest
 final class UserDefaultsHelperTests: XCTestCase {
     
     var sut: UserDefaultsHelper?
-    let recipeStub: RecipeStub? = nil
+    let recipeStub = RecipeStub()
     
     override func setUpWithError() throws {
         try super.setUpWithError()
@@ -24,14 +24,14 @@ final class UserDefaultsHelperTests: XCTestCase {
     }
 
     func testUserDefaultsHelper_whenSaveRecipes_recipesInDefault() {
-//
-//        // GIVEN
-//        sut?.saveSelectedRecipesIntoUserDefaults(recipes: [recipeStub?.getStubRecipe()])
-//
-//        // WHEN
+
+        // GIVEN
+//        sut?.saveSelectedRecipesIntoUserDefaults(recipes: [recipeStub?.getStubRecipeLocalRecipe()])
+
+        // WHEN
 //        let recipe = sut?.readSavedRecipesFromUserDefaults()
-//
-//        // THEN
+
+        // THEN
 //        XCTAssertEqual(recipe, [recipeStub?.getStubRecipe()])
     }
 }

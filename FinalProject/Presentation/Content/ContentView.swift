@@ -8,22 +8,22 @@
 import SwiftUI
 
 struct ContentView: View {
-    let viewmodel = RecipesViewModel(repository: RepositoryImpl(remoteDataSource: RemoteDataSourceImpl()))
+    let recipeViewModel = RecipesViewModel(repository: RepositoryImpl(remoteDataSource: RemoteDataSourceImpl()))
     
     var body: some View {
        
         TabView{
-//            GroceriesView(recipesViewModel: RecipesViewModel(repository: RepositoryImpl(remoteDataSource: RemoteDataSourceImpl()))).tabItem {
-//                Image(systemName: "list.clipboard")
-//                Text("My Groceries")
-//            }
+            GroceriesView(recipesViewModel: recipeViewModel).tabItem {
+                Image(systemName: "list.clipboard")
+                Text("My Groceries")
+            }
             
-            RecipesView(recipesViewModel: viewmodel).tabItem {
+            RecipesView(recipesViewModel: recipeViewModel).tabItem {
                 Image(systemName: "magnifyingglass")
                 Text("Search Recipe")
             }
             
-            SavedRecipesView(recipesViewModel: viewmodel).tabItem {
+            SavedRecipesView(recipesViewModel: recipeViewModel).tabItem {
                 Image(systemName: "bookmark.fill")
                 Text("Saved recipes")
             }

@@ -16,8 +16,13 @@ enum NetworkError: Error, Equatable {
 
 final class RemoteDataSourceImpl: RemoteDataSourceProtocol {
     
-    private let session = URLSession.shared
+//    private let session = URLSession.shared
+    private let session: NetworkFetchingProtocol
         
+    init(session: NetworkFetchingProtocol = URLSession.shared){
+        self.session = session
+    }
+    
     func getRecipes(query: String) async throws -> [RecipeModel]?{
         let server: String = "https://api.edamam.com/api/recipes/v2?type=public&q=\(query)&app_id=c6d3b936&app_key=d2bbffebefefdb3b3a52cca3845e91a4"
 
@@ -27,28 +32,25 @@ final class RemoteDataSourceImpl: RemoteDataSourceProtocol {
 
         // URL request
         var urlRequest = URLRequest(url: url)
-        
         urlRequest.httpMethod = "GET"
         
-//        urlRequest.setValue("d2bbffebefefdb3b3a52cca3845e91a4", forHTTPHeaderField: "app_key")
-//        urlRequest.setValue("c6d3b936", forHTTPHeaderField: "app_id")
         print(
             urlRequest.description
         )
 
         // Obetener la data de la llamada
-        do {
-            let (data, response) = try await session.data(for: urlRequest)
+//        do {
+            let (data, response) = try await session.data(url: urlRequest)
             guard let response = response as? HTTPURLResponse, response.statusCode == 200 else {
                 throw NetworkError.invalidResponse
             }
             
             let decodedData = try JSONDecoder().decode(RecipeResultModel.self, from: data)
             return decodedData.hits
-        } catch (let error){
-            print(error)
-            return []
-        }
+//        } catch (let error){
+//            print(error)
+//            return []
+//        }
     }
 }
 

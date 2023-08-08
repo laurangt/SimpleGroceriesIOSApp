@@ -21,7 +21,7 @@ final class MockRemoteDataSource: RemoteDataSourceProtocol {
     func getRecipes(query: String) async throws -> [FinalProject.RecipeModel]? {
         switch recipesFetchedSuccess {
         case true:
-            return [recipeStub.getStubRecipe()]
+            return [recipeStub.getStubRecipeRecipeModel()]
         case false:
             return []
         }

@@ -10,10 +10,21 @@ import Foundation
 
 final class MockRespository: RepositoryProtocol {
     
-    func getRecipes(query: String) async throws -> [FinalProject.LocalRecipe]? {
-        <#code#>
+    let recipesFetchedSuccess: Bool
+    let recipeStub: RecipeStub
+    
+    init(recipesFetchedSuccess: Bool = false, recipeStub: RecipeStub) {
+        self.recipesFetchedSuccess = recipesFetchedSuccess
+        self.recipeStub = recipeStub
     }
     
     
-    
+    func getRecipes(query: String) async throws -> [FinalProject.LocalRecipe]? {
+        switch recipesFetchedSuccess {
+        case true:
+            return [recipeStub.getStubRecipeLocalRecipe()]
+        case false:
+            return []
+        }
+    }
 }

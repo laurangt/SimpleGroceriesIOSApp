@@ -54,8 +54,12 @@ struct RecipesView: View {
          Button("Save recipes") {
             // TODO: add ingredients to groceries
             print("Add ingredients to my grocery list")
-            recipesViewModel.filterAndSaveSelectedRecipes()
-            // TODO: deselect selctedrecipes after added
+            recipesViewModel.filterSelectedRecipes()
+            recipesViewModel.selectedRecipes.forEach { recipe in
+               recipesViewModel.addRecipeToSaved(recipe: recipe)
+               // TODO: deselect selctedrecipes after added
+//               recipe.isSelected.toggle()
+            }
          }
          .frame(minHeight: 40)
          .padding(EdgeInsets(top: 10, leading: 0, bottom: 40, trailing: 0)).buttonStyle(.borderedProminent)
@@ -87,19 +91,19 @@ struct RecipeComponent: View {
                        content: { image in
                image.resizable()
                   .aspectRatio(contentMode: .fill)
-                  .frame(width: 170, height: 110).cornerRadius(15).scaledToFit()
-            },
-                       placeholder: {
+                  .frame(width: 170, height: 110)
+                  .cornerRadius(15)
+            }, placeholder: {
                ProgressView().frame(width: 170, height: 110)
             }).accessibilityAddTraits(.isImage).accessibilityLabel("Image of recipe")
             
             HStack(alignment: .center){
-               Text("\(recipe.remoteRecipe.label)").foregroundColor(.black).lineLimit(2).padding(3)
+               Text("\(recipe.remoteRecipe.label)").font(.subheadline).foregroundColor(.black).lineLimit(2).padding(3)
                CheckboxView(isChecked: $recipe.isSelected).foregroundColor(Color("mainOrange"))
             }
             Spacer()
          }
-      }.frame(width: 160, height: 170).shadow(radius: 5).cornerRadius(10)
+      }.frame(width: 170, height: 170).shadow(radius: 5).cornerRadius(10)
    }
 }
 

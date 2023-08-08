@@ -38,6 +38,10 @@
 		D66BAF212A794A3E00159D7D /* FinalProjectUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D66BAF202A794A3E00159D7D /* FinalProjectUITestsLaunchTests.swift */; };
 		D66FF4A42A7A7F21009E6050 /* GroceriesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D66FF4A32A7A7F21009E6050 /* GroceriesView.swift */; };
 		D66FF4E22A7A8233009E6050 /* GroceryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D66FF4E12A7A8233009E6050 /* GroceryModel.swift */; };
+		D6F052362A8232AB00511EB1 /* URLSessionExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6F052352A8232AB00511EB1 /* URLSessionExtension.swift */; };
+		D6F052382A8232CF00511EB1 /* NetworkFetchingProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6F052372A8232CF00511EB1 /* NetworkFetchingProtocol.swift */; };
+		D6FD7F362A8236580034F0DD /* NetworkFetchingMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6FD7F352A8236580034F0DD /* NetworkFetchingMock.swift */; };
+		D6FD7F382A823C8E0034F0DD /* URLProtocolMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6FD7F372A823C8E0034F0DD /* URLProtocolMock.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -92,6 +96,10 @@
 		D66BAF202A794A3E00159D7D /* FinalProjectUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinalProjectUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		D66FF4A32A7A7F21009E6050 /* GroceriesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroceriesView.swift; sourceTree = "<group>"; };
 		D66FF4E12A7A8233009E6050 /* GroceryModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroceryModel.swift; sourceTree = "<group>"; };
+		D6F052352A8232AB00511EB1 /* URLSessionExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionExtension.swift; sourceTree = "<group>"; };
+		D6F052372A8232CF00511EB1 /* NetworkFetchingProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkFetchingProtocol.swift; sourceTree = "<group>"; };
+		D6FD7F352A8236580034F0DD /* NetworkFetchingMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkFetchingMock.swift; sourceTree = "<group>"; };
+		D6FD7F372A823C8E0034F0DD /* URLProtocolMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLProtocolMock.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -135,6 +143,8 @@
 			children = (
 				D60111592A81352E003E57DF /* MockRemoteDataSource.swift */,
 				D60111772A8149AF003E57DF /* MockRepository.swift */,
+				D6FD7F352A8236580034F0DD /* NetworkFetchingMock.swift */,
+				D6FD7F372A823C8E0034F0DD /* URLProtocolMock.swift */,
 			);
 			path = Mocks;
 			sourceTree = "<group>";
@@ -208,8 +218,8 @@
 		D601116F2A814896003E57DF /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				D601116D2A814894003E57DF /* GroceryModelTests.swift */,
 				D60111702A8148A2003E57DF /* RecipeResultModelTests.swift */,
+				D601116D2A814894003E57DF /* GroceryModelTests.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -367,6 +377,7 @@
 			children = (
 				D636DBCF2A7BB90200E348ED /* RemoteDataSourceProtocol.swift */,
 				D636DBD12A7BB90900E348ED /* RepositoryProtocol.swift */,
+				D6F052372A8232CF00511EB1 /* NetworkFetchingProtocol.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -391,6 +402,7 @@
 		D66FF49C2A7A7E05009E6050 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				D6F052352A8232AB00511EB1 /* URLSessionExtension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -587,7 +599,9 @@
 				D636DBD22A7BB90900E348ED /* RepositoryProtocol.swift in Sources */,
 				D66FF4E22A7A8233009E6050 /* GroceryModel.swift in Sources */,
 				D601114E2A7F8722003E57DF /* UserDefaultsHelper.swift in Sources */,
+				D6F052362A8232AB00511EB1 /* URLSessionExtension.swift in Sources */,
 				D636DBBD2A7AAF9000E348ED /* RecipesView.swift in Sources */,
+				D6F052382A8232CF00511EB1 /* NetworkFetchingProtocol.swift in Sources */,
 				D636DBD62A7BC18700E348ED /* RecipesViewModel.swift in Sources */,
 				D636DBCE2A7BB8F500E348ED /* RemoteDataSourceImpl.swift in Sources */,
 				D636DBBF2A7AB04400E348ED /* CheckboxView.swift in Sources */,
@@ -604,10 +618,12 @@
 			files = (
 				D60111762A8148D9003E57DF /* RecipesViewModelTests.swift in Sources */,
 				D601115A2A81352E003E57DF /* MockRemoteDataSource.swift in Sources */,
+				D6FD7F362A8236580034F0DD /* NetworkFetchingMock.swift in Sources */,
 				D601116E2A814894003E57DF /* GroceryModelTests.swift in Sources */,
 				D60111712A8148A2003E57DF /* RecipeResultModelTests.swift in Sources */,
 				D60111562A813231003E57DF /* RemoteDataSourceTest.swift in Sources */,
 				D601116A2A81443F003E57DF /* UserDefaultsHelperTests.swift in Sources */,
+				D6FD7F382A823C8E0034F0DD /* URLProtocolMock.swift in Sources */,
 				D601116C2A81453C003E57DF /* RecipeStub.swift in Sources */,
 				D60111782A8149AF003E57DF /* MockRepository.swift in Sources */,
 				D60111672A8140FA003E57DF /* RepositoryTests.swift in Sources */,

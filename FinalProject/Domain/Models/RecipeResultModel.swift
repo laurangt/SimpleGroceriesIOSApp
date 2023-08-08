@@ -12,7 +12,7 @@ struct RecipeResultModel: Decodable {
 }
 
 struct RecipeModel: Codable{
-    let recipe: RemoteRecipe
+    var recipe: RemoteRecipe
 }
 
 struct RemoteRecipe: Codable {

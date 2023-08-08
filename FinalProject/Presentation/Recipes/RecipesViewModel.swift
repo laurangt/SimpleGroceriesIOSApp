@@ -39,11 +39,8 @@ final class RecipesViewModel: ObservableObject {
     }
     
 //TODO: deselected if clicked on button and store in userdefautls to load them in savedRecipesView()
-    func filterAndSaveSelectedRecipes(){
+    func filterSelectedRecipes(){
         selectedRecipes = recipes.filter { $0.isSelected }
-        selectedRecipes.forEach { recipe in
-            addRecipeToSaved(recipe: recipe)
-        }
     }
     
     func saveSelectedRecipesToUserDefaults(recipes: [LocalRecipe]){
@@ -61,6 +58,12 @@ final class RecipesViewModel: ObservableObject {
         savedRecipes.append(recipe)
         saveSelectedRecipesToUserDefaults(recipes: savedRecipes)
     }
+    
+//    func removeSelectedAfterAdded(){
+//        selectedRecipes.forEach { recipe in
+//            recipe.isSelected = false
+//        }
+//    }
 
     
     func deleteSavedRecipe(at offsets: IndexSet){
