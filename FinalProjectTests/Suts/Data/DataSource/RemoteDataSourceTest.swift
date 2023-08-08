@@ -36,9 +36,7 @@ final class RemoteDataSourceTest: XCTestCase {
         URLProtocolMock.requestHandler = { request in
             let response = HTTPURLResponse(url: request.url!, statusCode: 200, httpVersion: nil, headerFields: nil)!
             let recipes = [recipeStub.getStubRecipeRecipeModel()]
-            print(recipes)
             let data = try JSONEncoder().encode(recipes)
-            print(data)
             return (response, data)
         }
         
@@ -50,7 +48,7 @@ final class RemoteDataSourceTest: XCTestCase {
         
         // THEN
         XCTAssertNotNil(recipes.first)
-        XCTAssertEqual(recipes.first?.recipe.label, "")
+        XCTAssertEqual(recipes.first?.recipe.label, "pasta")
     }
     
     
