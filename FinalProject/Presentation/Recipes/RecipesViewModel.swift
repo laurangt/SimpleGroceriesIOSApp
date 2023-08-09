@@ -13,14 +13,14 @@ final class RecipesViewModel: ObservableObject {
     @Published var recipes: [LocalRecipe] = []
     @Published var selectedRecipes: [LocalRecipe] = []
     @Published var savedRecipes: [LocalRecipe] = []
-    var cuisineTypes = ["American", "Asian", "Italian", "Mediterranean", "Mexican"]
+    var cuisineTypes = ["American", "Asian", "Baking", "Caribbean", "Italian", "Indian", "Mediterranean", "Mexican"]
     
     
     init(repository: RepositoryProtocol) {
         self.repository = repository
         Task {
             //TODO: change query to category if using popup or do popup as defualt instead of pasta
-            await self.searchRecipes(query: "pizza")
+            await self.searchRecipes(query: "mediterranean")
         }
         loadSavedRecipesFromUserDefaults()
     }

@@ -6,10 +6,11 @@
 //
 
 import SwiftUI
+//TODO: if empty create text search for recipes and will be saved hree
 
 struct SavedRecipesView: View {
     @ObservedObject var recipesViewModel: RecipesViewModel
-
+    
     init(recipesViewModel: RecipesViewModel) {
         self.recipesViewModel = recipesViewModel
         recipesViewModel.loadSavedRecipesFromUserDefaults()
@@ -17,22 +18,28 @@ struct SavedRecipesView: View {
     
     var body: some View {
         NavigationStack{
-            List{
-                ForEach(recipesViewModel.savedRecipes){ savedRecipe in
-                    NavigationLink {
-                       RecipeDetailView(recipe: savedRecipe)
-                    } label: {
-                        SavedRecipeCell(savedRecipe: savedRecipe)
+            if recipesViewModel.savedRecipes.isEmpty {
+                EmptySavedRecipesPlaceholderView()
+            } else {
+                
+                List{
+                    ForEach(recipesViewModel.savedRecipes){ savedRecipe in
+                        NavigationLink {
+                            RecipeDetailView(recipe: savedRecipe)
+                        } label: {
+                            SavedRecipeCell(savedRecipe: savedRecipe)
+                        }
                     }
+                    .onDelete(perform: recipesViewModel.deleteSavedRecipe)
+                    .listRowSeparatorTint(Color("mainOrange"))
                 }
-                .onDelete(perform: recipesViewModel.deleteSavedRecipe)
-                .listRowSeparatorTint(Color("mainOrange"))
+                .onAppear(perform: {
+                    recipesViewModel.loadSavedRecipesFromUserDefaults()
+                })
+                .navigationTitle("Saved Recipes").navigationBarTitleDisplayMode(.inline)
             }
-            .onAppear(perform: {
-                recipesViewModel.loadSavedRecipesFromUserDefaults()
-            })
-            .navigationTitle("My saved Recipes")
         }
+        
     }
 }
 
@@ -50,12 +57,12 @@ struct SavedRecipeCell: View{
         HStack{
             AsyncImage(url: savedRecipe.image ?? URL(string: ""),
                        content: { image in
-               image.resizable()
-                  .aspectRatio(contentMode: .fill)
-                  .frame(width: 100, height: 80)
-                  .cornerRadius(15)
+                image.resizable()
+                    .aspectRatio(contentMode: .fill)
+                    .frame(width: 100, height: 80)
+                    .cornerRadius(15)
             }, placeholder: {
-               ProgressView().frame(width: 100, height: 80)
+                ProgressView().frame(width: 100, height: 80)
             }).accessibilityAddTraits(.isImage).accessibilityLabel("Image of recipe")
             Text("\(savedRecipe.label)")
         }

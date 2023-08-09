@@ -37,6 +37,7 @@
 		D66BAF1F2A794A3E00159D7D /* FinalProjectUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D66BAF1E2A794A3E00159D7D /* FinalProjectUITests.swift */; };
 		D66BAF212A794A3E00159D7D /* FinalProjectUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D66BAF202A794A3E00159D7D /* FinalProjectUITestsLaunchTests.swift */; };
 		D66FF4A42A7A7F21009E6050 /* GroceriesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D66FF4A32A7A7F21009E6050 /* GroceriesView.swift */; };
+		D6A657002A842667001435F3 /* EmptySavedRecipesPlaceholderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6A656FF2A842667001435F3 /* EmptySavedRecipesPlaceholderView.swift */; };
 		D6C3464A2A83A797006113F5 /* IngredientStub.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6C346492A83A797006113F5 /* IngredientStub.swift */; };
 		D6F052362A8232AB00511EB1 /* URLSessionExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6F052352A8232AB00511EB1 /* URLSessionExtension.swift */; };
 		D6F052382A8232CF00511EB1 /* NetworkFetchingProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6F052372A8232CF00511EB1 /* NetworkFetchingProtocol.swift */; };
@@ -94,6 +95,7 @@
 		D66BAF1E2A794A3E00159D7D /* FinalProjectUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinalProjectUITests.swift; sourceTree = "<group>"; };
 		D66BAF202A794A3E00159D7D /* FinalProjectUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinalProjectUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		D66FF4A32A7A7F21009E6050 /* GroceriesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroceriesView.swift; sourceTree = "<group>"; };
+		D6A656FF2A842667001435F3 /* EmptySavedRecipesPlaceholderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptySavedRecipesPlaceholderView.swift; sourceTree = "<group>"; };
 		D6C346492A83A797006113F5 /* IngredientStub.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngredientStub.swift; sourceTree = "<group>"; };
 		D6C3464B2A83AC65006113F5 /* FinalProject.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = FinalProject.xctestplan; sourceTree = "<group>"; };
 		D6F052352A8232AB00511EB1 /* URLSessionExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionExtension.swift; sourceTree = "<group>"; };
@@ -448,6 +450,7 @@
 			isa = PBXGroup;
 			children = (
 				D636DBBE2A7AB04400E348ED /* CheckboxView.swift */,
+				D6A656FF2A842667001435F3 /* EmptySavedRecipesPlaceholderView.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -611,6 +614,7 @@
 				D6F052382A8232CF00511EB1 /* NetworkFetchingProtocol.swift in Sources */,
 				D636DBD62A7BC18700E348ED /* RecipesViewModel.swift in Sources */,
 				D636DBCE2A7BB8F500E348ED /* RemoteDataSourceImpl.swift in Sources */,
+				D6A657002A842667001435F3 /* EmptySavedRecipesPlaceholderView.swift in Sources */,
 				D636DBBF2A7AB04400E348ED /* CheckboxView.swift in Sources */,
 				D636DBCC2A7BB8EA00E348ED /* RepositoryImpl.swift in Sources */,
 				D636DBC42A7AC9D100E348ED /* SavedRecipesView.swift in Sources */,

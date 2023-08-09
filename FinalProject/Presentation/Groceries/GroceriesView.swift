@@ -16,21 +16,25 @@ struct GroceriesView: View {
     
     // TODO: checkbox of each grocery not working rn all together
     // TODO: sometimes ingredients twice for one recipe then id problem what can i do - filter if already exist same name
-    
+    // TODO: if empty display add recipe to get ingredients
     var body: some View {
         NavigationStack{
-            List{
-                ForEach(recipesViewModel.savedRecipes){ recipe in
-//                    RecipeViewSection(recipe: recipe)
-                    GroceryCellView(recipe: recipe)
-                }
-                .listRowSeparatorTint(Color("mainOrange"))
-            }.navigationTitle("Groceries")
-                .onAppear {
-                    recipesViewModel.loadSavedRecipesFromUserDefaults()
-                }
-//                .scrollContentBackground(.hidden)
-//                .background(.white)
+            if recipesViewModel.savedRecipes == [] {
+                EmptySavedRecipesPlaceholderView()
+            } else {
+                List{
+                    ForEach(recipesViewModel.savedRecipes){ recipe in
+                        //                    RecipeViewSection(recipe: recipe)
+                        GroceryCellView(recipe: recipe)
+                    }
+                    .listRowSeparatorTint(Color("mainOrange"))
+                }.navigationTitle("My Groceries").navigationBarTitleDisplayMode(.inline)
+                    .onAppear {
+                        recipesViewModel.loadSavedRecipesFromUserDefaults()
+                    }
+                //                .scrollContentBackground(.hidden)
+                //                .background(.white)
+            }
         }
     }
 }
@@ -90,9 +94,9 @@ struct GroceriesView_Previews: PreviewProvider {
 struct GroceryCellView: View {
     var recipe: LocalRecipe
     @State private var isChecked = false
-
+    
     var body: some View {
-
+        
         //TODO: change actual groceryState and save to db
         //TODO: checkbox for single item not all at once whe clicked
         Section {
@@ -109,7 +113,7 @@ struct GroceryCellView: View {
                         } else {
                             Text("\(String(format: "%.2f", grocery.remoteIngredient.quantity))")
                         }
-
+                        
                         if grocery.remoteIngredient.measure == "<unit>" {
                             Text("unit")
                         } else if grocery.remoteIngredient.measure == "teaspoon" {

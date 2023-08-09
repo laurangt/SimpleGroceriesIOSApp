@@ -16,14 +16,14 @@ struct RootView: View {
         VStack{
             if self.isActive {
                 TabView{
-                    GroceriesView(recipesViewModel: recipeViewModel).tabItem {
-                        Image(systemName: "list.clipboard")
-                        Text("My Groceries")
-                    }
-                    
                     RecipesView(recipesViewModel: recipeViewModel).tabItem {
                         Image(systemName: "magnifyingglass")
                         Text("Search Recipe")
+                    }
+                    
+                    GroceriesView(recipesViewModel: recipeViewModel).tabItem {
+                        Image(systemName: "list.clipboard")
+                        Text("My Groceries")
                     }
                     
                     SavedRecipesView(recipesViewModel: recipeViewModel).tabItem {
