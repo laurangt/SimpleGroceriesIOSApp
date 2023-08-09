@@ -28,7 +28,7 @@ final class RepositoryImpl: RepositoryProtocol {
             LocalRecipe(label: $0.recipe.label, image: $0.recipe.image, localIngredients: mapperIngredientToGrocery(ingredients: $0.recipe.ingredients), cuisineType: $0.recipe.cuisineType)
         }
     }
-    
+    //TODO: change name to localingredient and delete grocerymodel
     func mapperIngredientToGrocery(ingredients: [RemoteIngredient]) -> [LocalIngredient] {
         return ingredients.map { LocalIngredient(remoteIngredient: RemoteIngredient(food: $0.food, quantity: $0.quantity, image: $0.image, foodId: $0.foodId), isCompleted: false) }
     }

@@ -16,7 +16,6 @@ enum NetworkError: Error, Equatable {
 
 final class RemoteDataSourceImpl: RemoteDataSourceProtocol {
     
-//    private let session = URLSession.shared
     private let session: NetworkFetchingProtocol
         
     init(session: NetworkFetchingProtocol = URLSession.shared){
@@ -39,18 +38,15 @@ final class RemoteDataSourceImpl: RemoteDataSourceProtocol {
         )
 
         // Obetener la data de la llamada
-//        do {
-            let (data, response) = try await session.data(url: urlRequest)
-            guard let response = response as? HTTPURLResponse, response.statusCode == 200 else {
-                throw NetworkError.invalidResponse
-            }
-            
-            let decodedData = try JSONDecoder().decode(RecipeResultModel.self, from: data)
-            return decodedData.hits
-//        } catch (let error){
-//            print(error)
-//            return []
-//        }
+
+        let (data, response) = try await session.data(url: urlRequest)
+        guard let response = response as? HTTPURLResponse, response.statusCode == 200 else {
+            throw NetworkError.invalidResponse
+        }
+    
+        let decodedData = try JSONDecoder().decode(RecipeResultModel.self, from: data)
+        return decodedData.hits
+
     }
 }
 

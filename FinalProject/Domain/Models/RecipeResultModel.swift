@@ -22,12 +22,16 @@ struct RemoteRecipe: Codable {
     let cuisineType: [String]
 }
 
-struct LocalRecipe: Codable, Identifiable {
+struct LocalRecipe: Codable, Identifiable, Equatable {
+    static func == (lhs: LocalRecipe, rhs: LocalRecipe) -> Bool {
+        lhs.isSelected == rhs.isSelected
+    }
+    
     var id = UUID()
     var isSelected: Bool = false
 //    var remoteRecipe: RemoteRecipe
     let label: String
-    var image: URL
+    var image: URL?
     var localIngredients: [LocalIngredient]
     let cuisineType: [String]
 }
@@ -36,7 +40,7 @@ struct RemoteIngredient: Codable {
     let food: String
     let quantity: Float
     var measure: String?
-    let image: URL
+    let image: URL?
     let foodId: String
     //TODO: id same if food multiple itme or ingredient multiple time
 //    var id = UUID()

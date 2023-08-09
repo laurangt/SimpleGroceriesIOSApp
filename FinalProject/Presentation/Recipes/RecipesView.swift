@@ -6,10 +6,11 @@
 //
 
 import SwiftUI
-
+//TODO: splash here as overlay so pics load in background and are loaded when eaching this page play w times
 struct RecipesView: View {
    @ObservedObject var recipesViewModel: RecipesViewModel
    @State private var recipeQuery = ""
+   @State private var recipeAddedBanner = false
    
    init(recipesViewModel: RecipesViewModel) {
       self.recipesViewModel = recipesViewModel
@@ -23,6 +24,24 @@ struct RecipesView: View {
    
    var body: some View {
       NavigationStack{
+         if recipeAddedBanner {
+            RoundedRectangle(cornerRadius: 15)
+               .fill(Color("mainOrange"))
+             .frame(
+               width: UIScreen.main.bounds.width * 0.9,
+               height: 50
+             )
+             .transition(.asymmetric(
+               insertion: .move(edge: .top),
+               removal: .move(edge: .top)
+             ))
+             .overlay { Text("\(recipesViewModel.selectedRecipes.count) recipes saved")
+             }.onAppear {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                    self.recipeAddedBanner.toggle()
+                }
+            }
+         }
          VStack{
             VStack {
                ScrollView {
@@ -44,7 +63,6 @@ struct RecipesView: View {
                      }
                   }
                }
-//               .foregroundColor(Color("mainOrange"))
             }
             .padding()
             //TODO: if categoreis change title to category
@@ -55,20 +73,24 @@ struct RecipesView: View {
             // TODO: add ingredients to groceries
             print("Add ingredients to my grocery list")
             recipesViewModel.filterSelectedRecipes()
+            recipesViewModel.loadSavedRecipesFromUserDefaults()
             recipesViewModel.selectedRecipes.forEach { recipe in
                recipesViewModel.addRecipeToSaved(recipe: recipe)
                // TODO: deselect selctedrecipes after added
 //               recipe.isSelected.toggle()
             }
+            recipesViewModel.saveSelectedRecipesToUserDefaults(recipes: recipesViewModel.savedRecipes)
+            withAnimation { recipeAddedBanner.toggle() }
+            
          }
          .frame(minHeight: 40)
          .padding(EdgeInsets(top: 10, leading: 0, bottom: 40, trailing: 0)).buttonStyle(.borderedProminent)
          .tint(Color("mainOrange"))
          .accessibilityLabel("Submit button: Save selected Recipes")
          .accessibilityAddTraits(.isButton)
+
       }
-//      .navigationBarBackButtonHidden(true)
-      
+      .navigationBarBackButtonHidden(true)
    }
    
 }
@@ -88,7 +110,7 @@ struct RecipeComponent: View {
    var body: some View {
       ZStack {
          VStack{
-            AsyncImage(url: URL(string: "\(recipe.image)"),
+            AsyncImage(url: recipe.image ?? URL(string: ""),
                        content: { image in
                image.resizable()
                   .aspectRatio(contentMode: .fill)

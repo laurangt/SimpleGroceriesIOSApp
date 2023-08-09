@@ -12,10 +12,11 @@ final class RecipesViewModelTests: XCTestCase {
 
     var sut: RecipesViewModel?
     var recipeStub = RecipeStub()
+    var ingredientStub = IngredientStub()
     
     override func setUpWithError() throws {
         try super.setUpWithError()
-        let mockRepository = MockRespository(recipesFetchedSuccess: true, recipeStub: recipeStub)
+        let mockRepository = MockRespository(recipesFetchedSuccess: true, recipeStub: recipeStub, ingredientStub: ingredientStub)
         sut = RecipesViewModel(repository: mockRepository)
     }
 
@@ -24,17 +25,28 @@ final class RecipesViewModelTests: XCTestCase {
         try super.tearDownWithError()
     }
 
-//    func testRecipesViewModel_whenSearchingRecipesWQuery_expectLocalRecipes() async throws {
-//        //GIVEN
-//        let query = "pizza"
-//        let recipes = [recipeStub.getStubRecipeLocalRecipe()]
-//        //WHEN
-//        var searchedRecipes = await sut?.searchRecipes(query: query)
-//        //THEN
-//        XCTAssertTrue((sut?.recipes.count)! > 0)
-//
-//    }
+    func testRecipesViewModel_whenfilterSelectedRecipes_expectSelectedRecipes() {
+        //GIVEN
+        let recipes = recipeStub.getStubSelectedNNotRecipes()
+        //WHEN
+        sut?.recipes = recipes
+        sut?.filterSelectedRecipes()
+        //THEN
+        let expected = recipeStub.expectedStubSelected()
+        XCTAssertTrue(sut?.selectedRecipes == expected)
+    }
     
+    func testRecipesViewModel_addRecipeToSaved_expectSavedRecipesStored() {
+        //GIVEN
+        sut?.savedRecipes = []
+        //WHEN
+        let selectedRecipe = recipeStub.getStubRecipeLocalRecipe()
+        sut?.addRecipeToSaved(recipe: selectedRecipe)
+
+        //THEN
+        XCTAssertTrue(sut?.savedRecipes.contains(selectedRecipe) == true)
+
+    }
 
 
 

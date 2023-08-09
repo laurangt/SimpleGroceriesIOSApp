@@ -15,16 +15,14 @@ struct RecipeDetailView: View {
 //    @State private var isHovered = false
 //    
     let columns = [
-       GridItem(.flexible()),
-       GridItem(.flexible()),
-       GridItem(.flexible()),
-       GridItem(.flexible()),
-       GridItem(.flexible())
+       GridItem(.flexible(), spacing: 5),
+       GridItem(.flexible(), spacing: 5),
+       GridItem(.flexible(), spacing: 5)
     ]
     
     var body: some View {
         VStack(alignment: .leading){
-            AsyncImage(url: URL(string: "\(recipe.image)"),
+            AsyncImage(url: recipe.image ?? URL(string: ""),
                        content: { image in
                image.resizable()
                   .aspectRatio(contentMode: .fill)
@@ -40,40 +38,41 @@ struct RecipeDetailView: View {
                     Text("\(recipe.label)")
                         .font(.title2)
                         .padding(EdgeInsets(top: 0, leading: 0, bottom: 4, trailing: 0))
-                    Text("Ingredients").font(.title3).padding(2)
-//                    ForEach(recipe.remoteRecipe.ingredients, id: \.foodId) { ingredient in
-//                        HStack{
-//                            Text("• \(ingredient.food)")
-//                            Spacer()
-//                            Text("\(String(format: "%.1f", ingredient.quantity))")
-//                            Text("\(ingredient.measure ?? " ")")
-//                        }.font(.body)
-//                    }
+                    Text("Ingredients").font(.title3).padding(EdgeInsets(top: 0, leading: 0, bottom: 2, trailing: 0))
+                    ForEach(recipe.localIngredients, id: \.id) { ingredient in
+                        HStack{
+                            Text("• \(ingredient.remoteIngredient.food)")
+                            Spacer()
+                            Text("\(String(format: "%.1f", ingredient.remoteIngredient.quantity))")
+                            Text("\(ingredient.remoteIngredient.measure ?? " ")")
+                        }.font(.body)
+                    }
                     
                     //TODO: get pics
-                    LazyVGrid(columns: columns) {
-                        ForEach(recipe.localIngredients, id: \.id) { ingredient in
-                            VStack{
-                                AsyncImage(url: URL(string: "\(ingredient.remoteIngredient.image)"),
-                                           content: { image in
-                                    image.resizable()
-                                        .aspectRatio(contentMode: .fill)
-                                        .frame(width: 50, height: 50).cornerRadius(15)
-                                }, placeholder: {
-                                    ProgressView().frame(width: 50, height: 50)
-                                })
-                                HStack{
-                                    Text("\(ingredient.remoteIngredient.food)")
-                                    Spacer()
-                                    Text("\(String(format: "%.1f", ingredient.remoteIngredient.quantity))")
-                                    Text("\(ingredient.remoteIngredient.measure ?? " ")")
-                                }.font(.footnote)
-                            }.frame(width: 50, height: 50)
-                        }
-                    }
+//                    LazyVGrid(columns: columns) {
+//                        ForEach(recipe.localIngredients, id: \.id) { ingredient in
+//                            VStack{
+//                                AsyncImage(url: URL(string: "\(ingredient.remoteIngredient.image)"),
+//                                           content: { image in
+//                                    image.resizable()
+//                                        .aspectRatio(contentMode: .fill)
+//                                        .frame(width: 100, height: 50).cornerRadius(15)
+//                                }, placeholder: {
+//                                    ProgressView().frame(width: 50, height: 50)
+//                                })
+//                                HStack{
+//                                    Text("\(ingredient.remoteIngredient.food)")
+//                                    Spacer()
+//                                    Text("\(String(format: "%.1f", ingredient.remoteIngredient.quantity))")
+//                                    Text("\(ingredient.remoteIngredient.measure ?? " ")")
+//                                }.font(.footnote)
+//                            }.frame(width: 100, height: 60).padding(16)
+//                        }
+//                    }
                 }.padding(16)
                 Spacer()
             }
         }
+       
     }
 }

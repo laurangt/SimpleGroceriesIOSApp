@@ -24,13 +24,11 @@ final class RecipeResultModelTests: XCTestCase {
 
     func testRecipeModel_whenInitalisingRecipeResult_expectRecipeResult() {
         // GIVEN
-        let hits = [recipeStub.getStubRecipeRecipeModel()]
+        let recipes = [recipeStub.getStubRecipeRecipeModel()]
         // WHEN
-//        let recipes = RecipeResultModel(hits: hits)
+        let initalizedRecipeHits = RecipeResultModel(hits: recipes)
         // THEN
-//        XCTAssertEqual(recipes.hits, hits)
-        XCTAssertEqual(hits[0].recipe.label, "")
-        
+        XCTAssertTrue(initalizedRecipeHits.hits.count == 1)
     }
 
 }

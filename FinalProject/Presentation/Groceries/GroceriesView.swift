@@ -49,7 +49,7 @@ struct RecipeViewSection: View {
         //TODO: change actual groceryState and save to db
         //TODO: checkbox for single item not all at once whe clicked
         Section {
-//            ForEach(recipe.localIngredients, id: \.id){ ingredient in
+//            ForEach(recipe.localIngredients){ ingredient in
 //                GroceryCellView(ingredient: ingredient)
 //            }
         } header: {
@@ -60,7 +60,7 @@ struct RecipeViewSection: View {
 
 // MARK: - Components
 struct GroceryCellView: View {
-    @Binding var ingredient: GroceryModel
+    @Binding var ingredient: LocalIngredient
     @State private var isChecked = false
 
     var body: some View {
@@ -69,11 +69,11 @@ struct GroceryCellView: View {
         //TODO: checkbox for single item not all at once whe clicked
         HStack{
             CheckboxView(isChecked: $ingredient.isCompleted).foregroundColor(Color("mainOrange"))
-            Text("\(ingredient.ingredient.food)")
+            Text("\(ingredient.remoteIngredient.food)")
             Spacer()
             HStack{
-                Text("\(String(format: "%.2f", ingredient.ingredient.quantity))")
-                Text("\(ingredient.ingredient.measure ?? " ")")
+                Text("\(String(format: "%.2f", ingredient.remoteIngredient.quantity))")
+                Text("\(ingredient.remoteIngredient.measure ?? " ")")
             }
         }
         

@@ -14,15 +14,14 @@ final class RecipesViewModel: ObservableObject {
     @Published var selectedRecipes: [LocalRecipe] = []
     @Published var savedRecipes: [LocalRecipe] = []
     // delete if circle thing gone
-    @Published var cuisineTypes = ["American", "Asian", "Italian", "Mediterranean", "Mexican"]
-
+    var cuisineTypes = ["American", "Asian", "Italian", "Mediterranean", "Mexican"]
     
     init(repository: RepositoryProtocol) {
         self.repository = repository
 
             Task {
                 //TODO: change query to category if using popup or do popup as defualt instead of pasta
-                await self.searchRecipes(query: "pasta")
+                await self.searchRecipes(query: "pizza")
             }
         
         loadSavedRecipesFromUserDefaults()
@@ -56,9 +55,7 @@ final class RecipesViewModel: ObservableObject {
     }
     
     func addRecipeToSaved(recipe: LocalRecipe) {
-        loadSavedRecipesFromUserDefaults()
         savedRecipes.append(recipe)
-        saveSelectedRecipesToUserDefaults(recipes: savedRecipes)
     }
     
 //    func removeSelectedAfterAdded(){

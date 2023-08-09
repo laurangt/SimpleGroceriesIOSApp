@@ -15,7 +15,7 @@ struct CircleLayoutPopupView: View {
             WheelLayout(radius: 130.0, rotation: .zero) {
                 ForEach(recipesViewModel.cuisineTypes, id: \.self) { cuisineType in
                     NavigationLink {
-                       RecipesView(recipesViewModel: recipesViewModel)
+                        RecipesView(recipesViewModel: recipesViewModel)
                     } label: {
                         Circle()
                             .fill(Color("mainOrange"))

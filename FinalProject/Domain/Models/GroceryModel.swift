@@ -9,6 +9,6 @@ import Foundation
 
 struct GroceryModel: Codable, Identifiable  {
     var id = UUID()
-    let ingredient: RemoteIngredient
+    let ingredient: LocalIngredient
     var isCompleted: Bool
 }

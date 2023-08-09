@@ -24,14 +24,15 @@ final class UserDefaultsHelperTests: XCTestCase {
     }
 
     func testUserDefaultsHelper_whenSaveRecipes_recipesInDefault() {
-
         // GIVEN
-//        sut?.saveSelectedRecipesIntoUserDefaults(recipes: [recipeStub?.getStubRecipeLocalRecipe()])
-
+        let recipes = [recipeStub.getStubRecipeLocalRecipe()]
         // WHEN
-//        let recipe = sut?.readSavedRecipesFromUserDefaults()
+        sut?.saveSelectedRecipesIntoUserDefaults(recipes: recipes)
+        
+        let readRecipes = sut?.readSavedRecipesFromUserDefaults()
 
         // THEN
-//        XCTAssertEqual(recipe, [recipeStub?.getStubRecipe()])
+        
+        XCTAssertNotNil(readRecipes)
     }
 }

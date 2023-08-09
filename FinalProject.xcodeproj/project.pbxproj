@@ -28,7 +28,6 @@
 		D636DBCE2A7BB8F500E348ED /* RemoteDataSourceImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = D636DBCD2A7BB8F500E348ED /* RemoteDataSourceImpl.swift */; };
 		D636DBD02A7BB90200E348ED /* RemoteDataSourceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = D636DBCF2A7BB90200E348ED /* RemoteDataSourceProtocol.swift */; };
 		D636DBD22A7BB90900E348ED /* RepositoryProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = D636DBD12A7BB90900E348ED /* RepositoryProtocol.swift */; };
-		D636DBD42A7BB9CB00E348ED /* GroceriesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D636DBD32A7BB9CB00E348ED /* GroceriesViewModel.swift */; };
 		D636DBD62A7BC18700E348ED /* RecipesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D636DBD52A7BC18700E348ED /* RecipesViewModel.swift */; };
 		D636DBDF2A7CEDF700E348ED /* RecipeDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D636DBDE2A7CEDF700E348ED /* RecipeDetailView.swift */; };
 		D66055912A825064006CDEBD /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = D66055902A825064006CDEBD /* Lottie */; };
@@ -41,6 +40,7 @@
 		D66BAF212A794A3E00159D7D /* FinalProjectUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D66BAF202A794A3E00159D7D /* FinalProjectUITestsLaunchTests.swift */; };
 		D66FF4A42A7A7F21009E6050 /* GroceriesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D66FF4A32A7A7F21009E6050 /* GroceriesView.swift */; };
 		D66FF4E22A7A8233009E6050 /* GroceryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D66FF4E12A7A8233009E6050 /* GroceryModel.swift */; };
+		D6C3464A2A83A797006113F5 /* IngredientStub.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6C346492A83A797006113F5 /* IngredientStub.swift */; };
 		D6F052362A8232AB00511EB1 /* URLSessionExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6F052352A8232AB00511EB1 /* URLSessionExtension.swift */; };
 		D6F052382A8232CF00511EB1 /* NetworkFetchingProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6F052372A8232CF00511EB1 /* NetworkFetchingProtocol.swift */; };
 		D6FD7F362A8236580034F0DD /* NetworkFetchingMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6FD7F352A8236580034F0DD /* NetworkFetchingMock.swift */; };
@@ -86,7 +86,6 @@
 		D636DBCD2A7BB8F500E348ED /* RemoteDataSourceImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteDataSourceImpl.swift; sourceTree = "<group>"; };
 		D636DBCF2A7BB90200E348ED /* RemoteDataSourceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteDataSourceProtocol.swift; sourceTree = "<group>"; };
 		D636DBD12A7BB90900E348ED /* RepositoryProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositoryProtocol.swift; sourceTree = "<group>"; };
-		D636DBD32A7BB9CB00E348ED /* GroceriesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroceriesViewModel.swift; sourceTree = "<group>"; };
 		D636DBD52A7BC18700E348ED /* RecipesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipesViewModel.swift; sourceTree = "<group>"; };
 		D636DBDE2A7CEDF700E348ED /* RecipeDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeDetailView.swift; sourceTree = "<group>"; };
 		D66055922A82546E006CDEBD /* LottieView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LottieView.swift; sourceTree = "<group>"; };
@@ -101,6 +100,8 @@
 		D66BAF202A794A3E00159D7D /* FinalProjectUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinalProjectUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		D66FF4A32A7A7F21009E6050 /* GroceriesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroceriesView.swift; sourceTree = "<group>"; };
 		D66FF4E12A7A8233009E6050 /* GroceryModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroceryModel.swift; sourceTree = "<group>"; };
+		D6C346492A83A797006113F5 /* IngredientStub.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngredientStub.swift; sourceTree = "<group>"; };
+		D6C3464B2A83AC65006113F5 /* FinalProject.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = FinalProject.xctestplan; sourceTree = "<group>"; };
 		D6F052352A8232AB00511EB1 /* URLSessionExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionExtension.swift; sourceTree = "<group>"; };
 		D6F052372A8232CF00511EB1 /* NetworkFetchingProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkFetchingProtocol.swift; sourceTree = "<group>"; };
 		D6FD7F352A8236580034F0DD /* NetworkFetchingMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkFetchingMock.swift; sourceTree = "<group>"; };
@@ -209,6 +210,7 @@
 			isa = PBXGroup;
 			children = (
 				D601116B2A81453C003E57DF /* RecipeStub.swift */,
+				D6C346492A83A797006113F5 /* IngredientStub.swift */,
 			);
 			path = Stubs;
 			sourceTree = "<group>";
@@ -283,6 +285,7 @@
 		D66BAEF72A794A3D00159D7D = {
 			isa = PBXGroup;
 			children = (
+				D6C3464B2A83AC65006113F5 /* FinalProject.xctestplan */,
 				D66BAF022A794A3E00159D7D /* FinalProject */,
 				D66BAF132A794A3E00159D7D /* FinalProjectTests */,
 				D66BAF1D2A794A3E00159D7D /* FinalProjectUITests */,
@@ -462,7 +465,6 @@
 			isa = PBXGroup;
 			children = (
 				D66FF4A32A7A7F21009E6050 /* GroceriesView.swift */,
-				D636DBD32A7BB9CB00E348ED /* GroceriesViewModel.swift */,
 			);
 			path = Groceries;
 			sourceTree = "<group>";
@@ -607,7 +609,6 @@
 				D66FF4A42A7A7F21009E6050 /* GroceriesView.swift in Sources */,
 				D636DBDF2A7CEDF700E348ED /* RecipeDetailView.swift in Sources */,
 				D636DBBA2A7AABC400E348ED /* RootView.swift in Sources */,
-				D636DBD42A7BB9CB00E348ED /* GroceriesViewModel.swift in Sources */,
 				D636DBD02A7BB90200E348ED /* RemoteDataSourceProtocol.swift in Sources */,
 				D66055932A82546E006CDEBD /* LottieView.swift in Sources */,
 				D636DBAE2A7A9E6D00E348ED /* SplashView.swift in Sources */,
@@ -638,6 +639,7 @@
 				D601116E2A814894003E57DF /* GroceryModelTests.swift in Sources */,
 				D60111712A8148A2003E57DF /* RecipeResultModelTests.swift in Sources */,
 				D60111562A813231003E57DF /* RemoteDataSourceTest.swift in Sources */,
+				D6C3464A2A83A797006113F5 /* IngredientStub.swift in Sources */,
 				D601116A2A81443F003E57DF /* UserDefaultsHelperTests.swift in Sources */,
 				D6FD7F382A823C8E0034F0DD /* URLProtocolMock.swift in Sources */,
 				D601116C2A81453C003E57DF /* RecipeStub.swift in Sources */,
