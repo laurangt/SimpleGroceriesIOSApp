@@ -21,11 +21,6 @@ struct RootView: View {
                         Text("My Groceries")
                     }
                     
-//                    CircleLayoutPopupView(recipesViewModel: recipeViewModel).tabItem {
-//                        Image(systemName: "magnifyingglass")
-//                        Text("Search Recipe")
-//                    }
-                    
                     RecipesView(recipesViewModel: recipeViewModel).tabItem {
                         Image(systemName: "magnifyingglass")
                         Text("Search Recipe")

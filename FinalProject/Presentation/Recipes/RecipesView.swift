@@ -7,7 +7,6 @@
 
 import SwiftUI
 //TODO: splash here as overlay so pics load in background and are loaded when eaching this page play w times
-//TODO: make banner text white
 struct RecipesView: View {
 
    @ObservedObject var recipesViewModel: RecipesViewModel
@@ -155,7 +154,7 @@ struct RecipeComponent: View {
             }).accessibilityAddTraits(.isImage).accessibilityLabel("Image of recipe")
             
             HStack(alignment: .center){
-               Text("\(recipe.label)").font(.subheadline).foregroundColor(.black).lineLimit(2).padding(3)
+               Text("\(recipe.label)").font(.subheadline).foregroundColor(Color("assetBlack")).lineLimit(2).padding(3)
                CheckboxView(isChecked: $recipe.isSelected).foregroundColor(Color("mainOrange"))
             }
             Spacer()

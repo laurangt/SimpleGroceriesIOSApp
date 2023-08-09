@@ -19,14 +19,16 @@ struct GroceriesView: View {
         NavigationStack{
             List{
                 ForEach(recipesViewModel.savedRecipes){ recipe in
-                    RecipeViewSection(recipe: recipe)
-//                    GroceryCellView(grocery: recipe)
+//                    RecipeViewSection(recipe: recipe)
+                    GroceryCellView(recipe: recipe)
                 }
                 .listRowSeparatorTint(Color("mainOrange"))
             }.navigationTitle("Groceries")
                 .onAppear {
                     recipesViewModel.loadSavedRecipesFromUserDefaults()
                 }
+//                .scrollContentBackground(.hidden)
+//                .background(.white)
         }
     }
 }
@@ -40,73 +42,73 @@ struct GroceriesView_Previews: PreviewProvider {
 
 
 
-// MARK: - Components
-struct RecipeViewSection: View {
-
-    var recipe: LocalRecipe
-    
-    var body: some View {
-        //TODO: change actual groceryState and save to db
-        //TODO: checkbox for single item not all at once whe clicked
-        Section {
-//            ForEach(recipe.localIngredients){ ingredient in
-//                GroceryCellView(ingredient: ingredient)
-//            }
-        } header: {
-            Text("\(recipe.label)")
-        }
-    }
-}
-
-// MARK: - Components
-struct GroceryCellView: View {
-    @Binding var ingredient: LocalIngredient
-    @State private var isChecked = false
-
-    var body: some View {
-
-        //TODO: change actual groceryState and save to db
-        //TODO: checkbox for single item not all at once whe clicked
-        HStack{
-            CheckboxView(isChecked: $ingredient.isCompleted).foregroundColor(Color("mainOrange"))
-            Text("\(ingredient.remoteIngredient.food)")
-            Spacer()
-            HStack{
-                Text("\(String(format: "%.2f", ingredient.remoteIngredient.quantity))")
-                Text("\(ingredient.remoteIngredient.measure ?? " ")")
-            }
-        }
-        
-    }
-}
-
-
+//// MARK: - Components
+//struct RecipeViewSection: View {
+//
+//    var recipe: LocalRecipe
+//    
+//    var body: some View {
+//        //TODO: change actual groceryState and save to db
+//        //TODO: checkbox for single item not all at once whe clicked
+//        Section {
+////            ForEach(recipe.localIngredients){ ingredient in
+////                GroceryCellView(ingredient: ingredient)
+////            }
+//        } header: {
+//            Text("\(recipe.label)")
+//        }
+//    }
+//}
 //
 //// MARK: - Components
 //struct GroceryCellView: View {
-//    var recipe: LocalRecipe
+//    @Binding var ingredient: LocalIngredient
 //    @State private var isChecked = false
 //
 //    var body: some View {
 //
 //        //TODO: change actual groceryState and save to db
 //        //TODO: checkbox for single item not all at once whe clicked
-//        Section {
-//            ForEach(recipe.remoteRecipe.ingredients){ grocery in
-//                HStack{
-//                    Image(systemName: isChecked ? "checkmark.square.fill" : "square").foregroundColor(Color("mainOrange")).onTapGesture {
-//                        isChecked.toggle()
-//                    }
-//                    Text("\(grocery.food)")
-//                    Spacer()
-//                    HStack{
-//                        Text("\(String(format: "%.2f", grocery.quantity))")
-//                        Text("\(grocery.measure ?? " ")")
-//                    }
-//                }
+//        HStack{
+//            CheckboxView(isChecked: $ingredient.isCompleted).foregroundColor(Color("mainOrange"))
+//            Text("\(ingredient.remoteIngredient.food)")
+//            Spacer()
+//            HStack{
+//                Text("\(String(format: "%.2f", ingredient.remoteIngredient.quantity))")
+//                Text("\(ingredient.remoteIngredient.measure ?? " ")")
 //            }
-//        } header: {
-//            Text("\(recipe.remoteRecipe.label)")
 //        }
+//        
 //    }
 //}
+
+
+//
+//// MARK: - Components
+struct GroceryCellView: View {
+    var recipe: LocalRecipe
+    @State private var isChecked = false
+
+    var body: some View {
+
+        //TODO: change actual groceryState and save to db
+        //TODO: checkbox for single item not all at once whe clicked
+        Section {
+            ForEach(recipe.localIngredients){ grocery in
+                HStack{
+                    Image(systemName: isChecked ? "checkmark.square.fill" : "square").foregroundColor(Color("mainOrange")).onTapGesture {
+                        isChecked.toggle()
+                    }
+                    Text("\(grocery.remoteIngredient.food)")
+                    Spacer()
+                    HStack{
+                        Text("\(String(format: "%.2f", grocery.remoteIngredient.quantity))")
+                        Text("\(grocery.remoteIngredient.measure ?? "")")
+                    }
+                }
+            }
+        } header: {
+            Text("\(recipe.label)")
+        }
+    }
+}
