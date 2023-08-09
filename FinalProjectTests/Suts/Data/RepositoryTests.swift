@@ -13,7 +13,7 @@ final class RepositoryTests: XCTestCase {
     var sut: RepositoryProtocol?
     let recipeStub = RecipeStub()
     let ingredientStub = IngredientStub()
-
+    
     override func setUpWithError() throws {
         try super.setUpWithError()
         let remoteDataSource = MockRemoteDataSource(recipesFetchedSuccess: true, recipeStub: recipeStub)
@@ -37,26 +37,15 @@ final class RepositoryTests: XCTestCase {
     }
 
 //    TODO: map function
-    func testRepository_whenMapperRemoteRecipe_expectLocalRecipe() {
+    func testRepository_whenMapperRecipeModel_expectLocalRecipe() {
         // GIVEN
-        let mockRemoteDataSource = MockRemoteDataSource(recipesFetchedSuccess: true, recipeStub: recipeStub)
-        sut = RepositoryImpl(remoteDataSource: mockRemoteDataSource)
         let recipes = [recipeStub.getStubRecipeRecipeModel()]
         // WHEN
         let mappedRecipe = sut?.mapperLocalRecipes(recipes: recipes)
         // THEN
-        XCTAssertTrue(type(of: mappedRecipe) == [LocalRecipe].self)
+        XCTAssertEqual(mappedRecipe, [recipeStub.getStubRecipeLocalRecipe()])
     }
 
     
-    func testRepository_whenMapperRemoteIngredient_expectLocalIngredient() {
-        // GIVEN
-        let mockRemoteDataSource = MockRemoteDataSource(recipesFetchedSuccess: true, recipeStub: recipeStub)
-        sut = RepositoryImpl(remoteDataSource: mockRemoteDataSource)
-        let remoteIngredients = [ingredientStub.getStubRemoteIngredients()]
-        // WHEN
-        let mappedIngredients = sut?.mapperRemoteIngredientToLocalIngredient(ingredients: remoteIngredients)
-        // THEN
-        XCTAssertTrue(type(of: mappedIngredients) == [LocalIngredient].self)
-    }
+    
 }

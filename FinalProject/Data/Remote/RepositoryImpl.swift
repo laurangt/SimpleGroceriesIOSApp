@@ -15,7 +15,7 @@ final class RepositoryImpl: RepositoryProtocol {
         self.remoteDataSource = remoteDataSource
     }
     
-    // MARK: recipes Api methods
+    // MARK: Fetch Recipes methods
     func getRecipes(query: String) async throws -> [LocalRecipe]? {
         guard let remoteRecipeData = try? await remoteDataSource.getRecipes(query: query) else {
             return []

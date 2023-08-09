@@ -8,8 +8,8 @@
 import Foundation
 
 enum NetworkError: Error, Equatable {
-    case invalidData
-    case noData
+//    case invalidData
+//    case noData
     case invalidResponse
     case malformedURL
 }

@@ -23,7 +23,7 @@ final class UserDefaultsHelperTests: XCTestCase {
         try super.tearDownWithError()
     }
 
-    func testUserDefaultsHelper_whenSaveRecipes_recipesInDefault() {
+    func testUserDefaultsHelper_whenSaveRecipes_expectRecipesInDefault() {
         // GIVEN
         let recipes = [recipeStub.getStubRecipeLocalRecipe()]
         // WHEN
@@ -35,4 +35,14 @@ final class UserDefaultsHelperTests: XCTestCase {
         
         XCTAssertNotNil(readRecipes)
     }
+    
+//    func testUserDefaultsHelper_whenReadRecipesWrong_expectEmpty() {
+//        // GIVEN
+//        let recipes: [LocalRecipe] = []
+//        sut?.saveSelectedRecipesIntoUserDefaults(recipes: recipes)
+//        // WHEN
+//        let readRecipes = sut?.readSavedRecipesFromUserDefaults()
+//        // THEN
+//        XCTAssertEqual(readRecipes, [])
+//    }
 }

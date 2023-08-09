@@ -36,7 +36,7 @@ final class RecipesViewModelTests: XCTestCase {
         XCTAssertTrue(sut?.selectedRecipes == expected)
     }
     
-    func testRecipesViewModel_addRecipeToSaved_expectSavedRecipesStored() {
+    func testRecipesViewModel_whenaddRecipeToSaved_expectSavedRecipesStored() {
         //GIVEN
         sut?.savedRecipes = []
         //WHEN
@@ -48,6 +48,17 @@ final class RecipesViewModelTests: XCTestCase {
 
     }
 
-
-
+    
+//    func testRepository_whenGetRecipesWithInvalidQueryGetRecipesFail_expectEmptyRecipes() async throws {
+//        // GIVEN
+//        let query = "invalid Query"
+//        let mockRemoteDataSource = MockRemoteDataSource(recipesFetchedSuccess: true, recipeStub: recipeStub)
+//        let repo = RepositoryImpl(remoteDataSource: mockRemoteDataSource)
+//        sut?.recipes = [recipeStub.getStubRecipeLocalRecipe()]
+//        // WHEN
+//
+//        await sut?.searchRecipes(query: query)
+//        //THEN
+//        XCTAssertEqual(sut?.recipes, [])
+//    }
 }
