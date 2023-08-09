@@ -16,20 +16,20 @@ struct RootView: View {
         VStack{
             if self.isActive {
                 TabView{
-        //            GroceriesView(recipesViewModel: recipeViewModel).tabItem {
-        //                Image(systemName: "list.clipboard")
-        //                Text("My Groceries")
-        //            }
-                    
-                    CircleLayoutPopupView(recipesViewModel: recipeViewModel).tabItem {
-                        Image(systemName: "magnifyingglass")
-                        Text("Search Recipe")
+                    GroceriesView(recipesViewModel: recipeViewModel).tabItem {
+                        Image(systemName: "list.clipboard")
+                        Text("My Groceries")
                     }
                     
-//                    RecipesView(recipesViewModel: recipeViewModel).tabItem {
+//                    CircleLayoutPopupView(recipesViewModel: recipeViewModel).tabItem {
 //                        Image(systemName: "magnifyingglass")
 //                        Text("Search Recipe")
 //                    }
+                    
+                    RecipesView(recipesViewModel: recipeViewModel).tabItem {
+                        Image(systemName: "magnifyingglass")
+                        Text("Search Recipe")
+                    }
                     
                     SavedRecipesView(recipesViewModel: recipeViewModel).tabItem {
                         Image(systemName: "bookmark.fill")

@@ -16,6 +16,7 @@ final class RecipesViewModel: ObservableObject {
     // delete if circle thing gone
     var cuisineTypes = ["American", "Asian", "Italian", "Mediterranean", "Mexican"]
     
+    
     init(repository: RepositoryProtocol) {
         self.repository = repository
 

@@ -11,7 +11,8 @@ import XCTest
 final class RemoteDataSourceTest: XCTestCase {
 
     var sut: RemoteDataSourceProtocol?
-    
+    let recipeStub = RecipeStub()
+
     override func setUpWithError() throws {
         try super.setUpWithError()
         let URLSessionMock = NetworkFetchingMock()
@@ -27,7 +28,6 @@ final class RemoteDataSourceTest: XCTestCase {
         // GIVEN
         let configuration = URLSessionConfiguration.default
         configuration.protocolClasses = [URLProtocolMock.self]
-        let recipeStub = RecipeStub()
         // Inyectamos la configuración nuestra al mock
         let mockURLSession = URLSession.init(configuration: configuration)
         sut = RemoteDataSourceImpl(session: mockURLSession)
@@ -35,7 +35,7 @@ final class RemoteDataSourceTest: XCTestCase {
         // Le metemos el request handler con status code y la data que queramos
         URLProtocolMock.requestHandler = { request in
             let response = HTTPURLResponse(url: request.url!, statusCode: 200, httpVersion: nil, headerFields: nil)!
-            let recipes = [recipeStub.getStubRecipeRecipeModel()]
+            let recipes = [self.recipeStub.getStubRecipeRecipeModel()]
             let data = try JSONEncoder().encode(recipes)
             return (response, data)
         }
@@ -52,9 +52,32 @@ final class RemoteDataSourceTest: XCTestCase {
     }
     
     
-//    func testRemoteDataSource_whenFetchingApiFail_expectNil() async throws {
-//
-//    }
+    func testRemoteDataSource_whenFetchingApiinvalidquery_expectNil() async throws {
+        // GIVEN
+        let configuration = URLSessionConfiguration.default
+        configuration.protocolClasses = [URLProtocolMock.self]
+        // Inyectamos la configuración nuestra al mock
+        let mockURLSession = URLSession.init(configuration: configuration)
+        sut = RemoteDataSourceImpl(session: mockURLSession)
+        
+        // Le metemos el request handler con status code y la data que queramos
+        URLProtocolMock.requestHandler = { request in
+            let response = HTTPURLResponse(url: request.url!, statusCode: 400, httpVersion: nil, headerFields: nil)!
+            let recipes = [self.recipeStub.getStubRecipeRecipeModel()]
+            let data = try JSONEncoder().encode(recipes)
+            return (response, data)
+        }
+        
+        // WHEN
+        guard let recipes = try? await sut?.getRecipes(query: "invalid query") else {
+            XCTFail("Recipes should not be able to be fetched with invalid query")
+            return
+        }
+        
+        // THEN
+        XCTAssertEqual(recipes.count, 0)
+
+    }
 }
 
 

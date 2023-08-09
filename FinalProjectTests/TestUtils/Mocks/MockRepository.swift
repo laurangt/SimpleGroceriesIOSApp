@@ -40,7 +40,7 @@ final class MockRespository: RepositoryProtocol {
         }
     }
     
-    func mapperIngredientToGrocery(ingredients: [FinalProject.RemoteIngredient]) -> [FinalProject.LocalIngredient] {
+    func mapperRemoteIngredientToLocalIngredient(ingredients: [FinalProject.RemoteIngredient]) -> [FinalProject.LocalIngredient] {
         switch recipesFetchedSuccess {
         case true:
             return [ingredientStub.getStubLocalIngredient()]

@@ -7,16 +7,24 @@
 
 import SwiftUI
 //TODO: splash here as overlay so pics load in background and are loaded when eaching this page play w times
+//TODO: make banner text white
 struct RecipesView: View {
+
    @ObservedObject var recipesViewModel: RecipesViewModel
    @State private var recipeQuery = ""
    @State private var recipeAddedBanner = false
+   @State private var navigationTitleCuisine = "Recipes"
    
    init(recipesViewModel: RecipesViewModel) {
       self.recipesViewModel = recipesViewModel
    }
    
    let columns = [
+      GridItem(.flexible()),
+      GridItem(.flexible())
+   ]
+   
+   let rowsCuisine = [
       GridItem(.flexible()),
       GridItem(.flexible())
    ]
@@ -35,8 +43,8 @@ struct RecipesView: View {
                insertion: .move(edge: .top),
                removal: .move(edge: .top)
              ))
-             .overlay { Text("\(recipesViewModel.selectedRecipes.count) recipes saved")
-             }.onAppear {
+             .overlay { Text("\(recipesViewModel.selectedRecipes.count) recipes saved").foregroundColor(.white)}
+             .onAppear {
                 DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
                     self.recipeAddedBanner.toggle()
                 }
@@ -44,7 +52,34 @@ struct RecipesView: View {
          }
          VStack{
             VStack {
+               HStack{
+                  VStack(alignment: .leading) {
+                     Text("Recommended cuisines").font(.body)
+                     ScrollView(.horizontal) {
+                        LazyHGrid(rows: rowsCuisine) {
+                           ForEach(recipesViewModel.cuisineTypes, id: \.self){ cuisineType in
+                              ZStack{
+                                 RoundedRectangle(cornerRadius: 15)
+                                    .fill(Color("mainOrange"))
+                                    .frame(width: 120, height: 40)
+                                 Button {
+                                    Task {
+                                       await recipesViewModel.searchRecipes(query: cuisineType)
+                                    }
+                                    navigationTitleCuisine = cuisineType + " Recipes"
+                                 } label: {
+                                    Text("\(cuisineType)").foregroundColor(.white).font(.callout)
+                                 }
+
+                              }
+                              
+                           }
+                        }.frame(height: 100)
+                     }
+                  }
+               }
                ScrollView {
+                  
                   LazyVGrid(columns: columns) {
                      ForEach(recipesViewModel.recipes.indices, id: \.self){ index in
                         NavigationLink {
@@ -65,34 +100,33 @@ struct RecipesView: View {
                }
             }
             .padding()
-            //TODO: if categoreis change title to category
-         }.navigationTitle("Recipes")
-            .navigationBarTitleDisplayMode(.inline)
-         Spacer()
-         Button("Save recipes") {
-            // TODO: add ingredients to groceries
-            print("Add ingredients to my grocery list")
-            recipesViewModel.filterSelectedRecipes()
-            recipesViewModel.loadSavedRecipesFromUserDefaults()
-            recipesViewModel.selectedRecipes.forEach { recipe in
-               recipesViewModel.addRecipeToSaved(recipe: recipe)
-               // TODO: deselect selctedrecipes after added
-//               recipe.isSelected.toggle()
+            .overlay(alignment: .bottom) {
+               Button("Save recipes") {
+                  // TODO: add ingredients to groceries
+                  print("Add ingredients to my grocery list")
+                  recipesViewModel.filterSelectedRecipes()
+                  recipesViewModel.loadSavedRecipesFromUserDefaults()
+                  recipesViewModel.selectedRecipes.forEach { recipe in
+                     recipesViewModel.addRecipeToSaved(recipe: recipe)
+                     // TODO: deselect selctedrecipes after added
+      //               recipe.isSelected.toggle()
+                  }
+                  recipesViewModel.saveSelectedRecipesToUserDefaults(recipes: recipesViewModel.savedRecipes)
+                  withAnimation { recipeAddedBanner.toggle() }
+                  
+               }
+               .frame(height: 40)
+               .padding(EdgeInsets(top: 10, leading: 0, bottom: 40, trailing: 0)).buttonStyle(.borderedProminent)
+               .tint(Color("mainOrange"))
+               .accessibilityLabel("Submit button: Save selected Recipes")
+               .accessibilityAddTraits(.isButton)
             }
-            recipesViewModel.saveSelectedRecipesToUserDefaults(recipes: recipesViewModel.savedRecipes)
-            withAnimation { recipeAddedBanner.toggle() }
-            
-         }
-         .frame(minHeight: 40)
-         .padding(EdgeInsets(top: 10, leading: 0, bottom: 40, trailing: 0)).buttonStyle(.borderedProminent)
-         .tint(Color("mainOrange"))
-         .accessibilityLabel("Submit button: Save selected Recipes")
-         .accessibilityAddTraits(.isButton)
-
+            //TODO: if categoreis change title to category
+         }.navigationTitle("\(navigationTitleCuisine)")
+            .navigationBarTitleDisplayMode(.inline)
       }
       .navigationBarBackButtonHidden(true)
    }
-   
 }
 
 struct RecipesView_Previews: PreviewProvider {
@@ -129,5 +163,6 @@ struct RecipeComponent: View {
       }.frame(width: 170, height: 170).shadow(radius: 5).cornerRadius(10)
    }
 }
+
 
 

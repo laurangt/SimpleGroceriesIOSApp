@@ -37,8 +37,7 @@ final class RemoteDataSourceImpl: RemoteDataSourceProtocol {
             urlRequest.description
         )
 
-        // Obetener la data de la llamada
-
+        // Get fetched data
         let (data, response) = try await session.data(url: urlRequest)
         guard let response = response as? HTTPURLResponse, response.statusCode == 200 else {
             throw NetworkError.invalidResponse

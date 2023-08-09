@@ -55,7 +55,7 @@ final class RepositoryTests: XCTestCase {
         sut = RepositoryImpl(remoteDataSource: mockRemoteDataSource)
         let remoteIngredients = [ingredientStub.getStubRemoteIngredients()]
         // WHEN
-        let mappedIngredients = sut?.mapperIngredientToGrocery(ingredients: remoteIngredients)
+        let mappedIngredients = sut?.mapperRemoteIngredientToLocalIngredient(ingredients: remoteIngredients)
         // THEN
         XCTAssertTrue(type(of: mappedIngredients) == [LocalIngredient].self)
     }

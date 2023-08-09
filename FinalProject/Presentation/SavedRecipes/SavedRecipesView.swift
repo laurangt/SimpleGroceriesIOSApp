@@ -48,7 +48,6 @@ struct SavedRecipeCell: View{
     
     var body: some View {
         HStack{
-            //TODO: image default or see whats up
             AsyncImage(url: savedRecipe.image ?? URL(string: ""),
                        content: { image in
                image.resizable()

@@ -29,7 +29,6 @@ struct LocalRecipe: Codable, Identifiable, Equatable {
     
     var id = UUID()
     var isSelected: Bool = false
-//    var remoteRecipe: RemoteRecipe
     let label: String
     var image: URL?
     var localIngredients: [LocalIngredient]
@@ -42,8 +41,6 @@ struct RemoteIngredient: Codable {
     var measure: String?
     let image: URL?
     let foodId: String
-    //TODO: id same if food multiple itme or ingredient multiple time
-//    var id = UUID()
 }
 
 struct LocalIngredient: Codable, Identifiable {
