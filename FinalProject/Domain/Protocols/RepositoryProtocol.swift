@@ -9,4 +9,6 @@ import Foundation
 
 protocol RepositoryProtocol {
     func getRecipes(query: String) async throws -> [LocalRecipe]?
+    func mapperIngredientToGrocery(ingredients: [RemoteIngredient]) -> [LocalIngredient]
+
 }

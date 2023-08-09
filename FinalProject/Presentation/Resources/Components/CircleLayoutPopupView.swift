@@ -8,28 +8,34 @@
 import SwiftUI
 
 struct CircleLayoutPopupView: View {
-    // TODO: fetch categories
-    let categories = ["Italian", "Vegan", "American", "Asian", "Healthy"]
-    
-//    let colors: [Color] = [.yellow, .orange, .red, .pink, .purple]
-    
+    @ObservedObject var recipesViewModel: RecipesViewModel
+   
     var body: some View {
-        WheelLayout(radius: 130.0, rotation: .zero) {
-            ForEach(categories, id: \.self) { category in
-                Circle()
-                //              .fill(colors[idx%colors.count].opacity(0.7))
-                    .opacity(0.3)
-                    .frame(width: 100, height: 100)
-                    .overlay { Text("\(category)") }
+        NavigationView {
+            WheelLayout(radius: 130.0, rotation: .zero) {
+                ForEach(recipesViewModel.cuisineTypes, id: \.self) { cuisineType in
+                    NavigationLink {
+                       RecipesView(recipesViewModel: recipesViewModel)
+                    } label: {
+                        Circle()
+                            .fill(Color("mainOrange"))
+                            .opacity(0.3)
+                            .frame(width: 130, height: 130)
+                            .overlay { Text("\(cuisineType)")
+                            }
+                    }
+                    
+                }
             }
         }
+        
     }
     
 }
 
 struct CircleLayoutPopupView_Previews: PreviewProvider {
     static var previews: some View {
-        CircleLayoutPopupView()
+        CircleLayoutPopupView(recipesViewModel: RecipesViewModel(repository: RepositoryImpl(remoteDataSource: RemoteDataSourceImpl())))
     }
 }
 

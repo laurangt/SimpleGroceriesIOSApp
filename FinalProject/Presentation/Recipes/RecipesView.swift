@@ -43,8 +43,8 @@ struct RecipesView: View {
                         await recipesViewModel.searchRecipes(query: recipeQuery.lowercased())
                      }
                   }
-                  
                }
+//               .foregroundColor(Color("mainOrange"))
             }
             .padding()
             //TODO: if categoreis change title to category
@@ -67,6 +67,7 @@ struct RecipesView: View {
          .accessibilityLabel("Submit button: Save selected Recipes")
          .accessibilityAddTraits(.isButton)
       }
+//      .navigationBarBackButtonHidden(true)
       
    }
    
@@ -87,7 +88,7 @@ struct RecipeComponent: View {
    var body: some View {
       ZStack {
          VStack{
-            AsyncImage(url: URL(string: "\(recipe.remoteRecipe.image)"),
+            AsyncImage(url: URL(string: "\(recipe.image)"),
                        content: { image in
                image.resizable()
                   .aspectRatio(contentMode: .fill)
@@ -98,7 +99,7 @@ struct RecipeComponent: View {
             }).accessibilityAddTraits(.isImage).accessibilityLabel("Image of recipe")
             
             HStack(alignment: .center){
-               Text("\(recipe.remoteRecipe.label)").font(.subheadline).foregroundColor(.black).lineLimit(2).padding(3)
+               Text("\(recipe.label)").font(.subheadline).foregroundColor(.black).lineLimit(2).padding(3)
                CheckboxView(isChecked: $recipe.isSelected).foregroundColor(Color("mainOrange"))
             }
             Spacer()

@@ -25,8 +25,12 @@ final class RepositoryImpl: RepositoryProtocol {
     
     func mapperLocalRecipes(recipes: [RecipeModel]) -> [LocalRecipe] {
         return recipes.map {
-            LocalRecipe(remoteRecipe: RemoteRecipe(label: $0.recipe.label, image: $0.recipe.image, ingredients: $0.recipe.ingredients, cuisineType: $0.recipe.cuisineType))
+            LocalRecipe(label: $0.recipe.label, image: $0.recipe.image, localIngredients: mapperIngredientToGrocery(ingredients: $0.recipe.ingredients), cuisineType: $0.recipe.cuisineType)
         }
+    }
+    
+    func mapperIngredientToGrocery(ingredients: [RemoteIngredient]) -> [LocalIngredient] {
+        return ingredients.map { LocalIngredient(remoteIngredient: RemoteIngredient(food: $0.food, quantity: $0.quantity, image: $0.image, foodId: $0.foodId), isCompleted: false) }
     }
     
 }

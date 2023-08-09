@@ -7,8 +7,8 @@
 
 import Foundation
 
-struct GroceryModel: Decodable, Identifiable  {
+struct GroceryModel: Codable, Identifiable  {
     var id = UUID()
-    let ingredient: Ingredient
-    var isCompleted: Bool = false
+    let ingredient: RemoteIngredient
+    var isCompleted: Bool
 }

@@ -13,7 +13,9 @@ final class RecipesViewModel: ObservableObject {
     @Published var recipes: [LocalRecipe] = []
     @Published var selectedRecipes: [LocalRecipe] = []
     @Published var savedRecipes: [LocalRecipe] = []
-   
+    // delete if circle thing gone
+    @Published var cuisineTypes = ["American", "Asian", "Italian", "Mediterranean", "Mexican"]
+
     
     init(repository: RepositoryProtocol) {
         self.repository = repository
@@ -70,6 +72,8 @@ final class RecipesViewModel: ObservableObject {
         savedRecipes.remove(atOffsets: offsets)
         saveSelectedRecipesToUserDefaults(recipes: savedRecipes)
     }
+
+
 }
 
 

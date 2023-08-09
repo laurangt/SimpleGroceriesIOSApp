@@ -21,16 +21,21 @@ struct RootView: View {
         //                Text("My Groceries")
         //            }
                     
-                    RecipesView(recipesViewModel: recipeViewModel).tabItem {
+                    CircleLayoutPopupView(recipesViewModel: recipeViewModel).tabItem {
                         Image(systemName: "magnifyingglass")
                         Text("Search Recipe")
                     }
+                    
+//                    RecipesView(recipesViewModel: recipeViewModel).tabItem {
+//                        Image(systemName: "magnifyingglass")
+//                        Text("Search Recipe")
+//                    }
                     
                     SavedRecipesView(recipesViewModel: recipeViewModel).tabItem {
                         Image(systemName: "bookmark.fill")
                         Text("Saved recipes")
                     }
-                }
+                }.accentColor(Color("mainOrange"))
             } else {
                 SplashView()
             }
