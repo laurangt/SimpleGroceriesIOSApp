@@ -30,7 +30,7 @@ final class RepositoryImpl: RepositoryProtocol {
     }
 
     func mapperRemoteIngredientToLocalIngredient(ingredients: [RemoteIngredient]) -> [LocalIngredient] {
-        return ingredients.map { LocalIngredient(remoteIngredient: RemoteIngredient(food: $0.food, quantity: $0.quantity, image: $0.image, foodId: $0.foodId), isCompleted: false) }
+        return ingredients.map { LocalIngredient(remoteIngredient: RemoteIngredient(food: $0.food, quantity: $0.quantity, measure: $0.measure, image: $0.image, foodId: $0.foodId), isCompleted: false) }
     }
     
 }

@@ -14,7 +14,9 @@ struct GroceriesView: View {
         self.recipesViewModel = recipesViewModel
     }
     
-    // TODO: get actual grocerylist
+    // TODO: checkbox of each grocery not working rn all together
+    // TODO: sometimes ingredients twice for one recipe then id problem what can i do - filter if already exist same name
+    
     var body: some View {
         NavigationStack{
             List{
@@ -102,8 +104,23 @@ struct GroceryCellView: View {
                     Text("\(grocery.remoteIngredient.food)")
                     Spacer()
                     HStack{
-                        Text("\(String(format: "%.2f", grocery.remoteIngredient.quantity))")
-                        Text("\(grocery.remoteIngredient.measure ?? "")")
+                        if String(format: "%.2f", grocery.remoteIngredient.quantity).hasSuffix(".00") {
+                            Text("\(String(format: "%.0f", grocery.remoteIngredient.quantity))")
+                        } else {
+                            Text("\(String(format: "%.2f", grocery.remoteIngredient.quantity))")
+                        }
+
+                        if grocery.remoteIngredient.measure == "<unit>" {
+                            Text("unit")
+                        } else if grocery.remoteIngredient.measure == "teaspoon" {
+                            Text("tsp")
+                        } else if grocery.remoteIngredient.measure == "tablespoon" {
+                            Text("tbsp")
+                        } else if grocery.remoteIngredient.measure == "pound" {
+                            Text("lb")
+                        } else {
+                            Text("\(grocery.remoteIngredient.measure ?? "")")
+                        }
                     }
                 }
             }

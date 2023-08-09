@@ -7,6 +7,7 @@
 
 import SwiftUI
 //TODO: splash here as overlay so pics load in background and are loaded when eaching this page play w times
+
 struct RecipesView: View {
 
    @ObservedObject var recipesViewModel: RecipesViewModel
@@ -42,7 +43,10 @@ struct RecipesView: View {
                insertion: .move(edge: .top),
                removal: .move(edge: .top)
              ))
-             .overlay { Text("\(recipesViewModel.selectedRecipes.count) recipes saved").foregroundColor(.white)}
+             .overlay {
+                recipesViewModel.selectedRecipes.count == 1 ? Text("\(recipesViewModel.selectedRecipes.count) recipe saved").foregroundColor(.white) : Text("\(recipesViewModel.selectedRecipes.count) recipes saved").foregroundColor(.white)
+             }
+//             .overlay { Text("\(recipesViewModel.selectedRecipes.count) recipes saved").foregroundColor(.white)}
              .onAppear {
                 DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
                     self.recipeAddedBanner.toggle()
