@@ -5,7 +5,8 @@ Using:
 - SwiftUI
 - MVVM
 - SOLID
-- Async Await for API call
+- Async Await
+- Unit testing
 
 
 Functionality:
