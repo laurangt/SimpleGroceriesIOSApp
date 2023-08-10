@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-//TODO: if empty create text search for recipes and will be saved hree
 
 struct SavedRecipesView: View {
     @ObservedObject var recipesViewModel: RecipesViewModel

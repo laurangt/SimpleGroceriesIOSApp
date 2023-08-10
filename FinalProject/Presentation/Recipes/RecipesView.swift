@@ -7,7 +7,8 @@
 
 import SwiftUI
 //TODO: splash here as overlay so pics load in background and are loaded when eaching this page play w times
-
+//TODO: delete search bar when enter
+//TODO:  capitalize all ingredients
 struct RecipesView: View {
 
    @ObservedObject var recipesViewModel: RecipesViewModel
@@ -46,7 +47,6 @@ struct RecipesView: View {
              .overlay {
                 recipesViewModel.selectedRecipes.count == 1 ? Text("\(recipesViewModel.selectedRecipes.count) recipe saved").foregroundColor(.white) : Text("\(recipesViewModel.selectedRecipes.count) recipes saved").foregroundColor(.white)
              }
-//             .overlay { Text("\(recipesViewModel.selectedRecipes.count) recipes saved").foregroundColor(.white)}
              .onAppear {
                 DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
                     self.recipeAddedBanner.toggle()
@@ -99,24 +99,22 @@ struct RecipesView: View {
                      if !recipeQuery.isEmpty {
                         await recipesViewModel.searchRecipes(query: recipeQuery.lowercased())
                      }
+                     recipeQuery = ""
                   }
+                  
                }
             }
             .padding()
             .overlay(alignment: .bottom) {
                Button("Save recipes") {
-                  // TODO: add ingredients to groceries
-                  print("Add ingredients to my grocery list")
                   recipesViewModel.filterSelectedRecipes()
-                  recipesViewModel.loadSavedRecipesFromUserDefaults()
+//                  recipesViewModel.loadSavedRecipesFromUserDefaults()
                   recipesViewModel.selectedRecipes.forEach { recipe in
                      recipesViewModel.addRecipeToSaved(recipe: recipe)
-                     // TODO: deselect selctedrecipes after added
-      //               recipe.isSelected.toggle()
                   }
                   recipesViewModel.saveSelectedRecipesToUserDefaults(recipes: recipesViewModel.savedRecipes)
                   withAnimation { recipeAddedBanner.toggle() }
-                  
+                  recipesViewModel.removeSelectedAfterAdded()
                }
                .frame(height: 40)
                .padding(EdgeInsets(top: 10, leading: 0, bottom: 40, trailing: 0)).buttonStyle(.borderedProminent)
@@ -124,7 +122,6 @@ struct RecipesView: View {
                .accessibilityLabel("Submit button: Save selected Recipes")
                .accessibilityAddTraits(.isButton)
             }
-            //TODO: if categoreis change title to category
          }.navigationTitle("\(navigationTitleCuisine)")
             .navigationBarTitleDisplayMode(.inline)
       }

@@ -8,8 +8,6 @@
 import Foundation
 
 enum NetworkError: Error, Equatable {
-//    case invalidData
-//    case noData
     case invalidResponse
     case malformedURL
 }
@@ -33,10 +31,6 @@ final class RemoteDataSourceImpl: RemoteDataSourceProtocol {
         var urlRequest = URLRequest(url: url)
         urlRequest.httpMethod = "GET"
         
-        print(
-            urlRequest.description
-        )
-
         // Get fetched data
         let (data, response) = try await session.data(url: urlRequest)
         guard let response = response as? HTTPURLResponse, response.statusCode == 200 else {

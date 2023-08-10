@@ -12,7 +12,7 @@ struct EmptySavedRecipesPlaceholderView: View {
         NavigationStack{
             Text("Please save some recipes first")
             Image(systemName: "fork.knife.circle").animation(.easeInOut(duration: 2))
-        }.navigationTitle("Groceries")
+        }
     }
 }
 

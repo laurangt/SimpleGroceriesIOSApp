@@ -6,7 +6,7 @@
 //
 
 import Foundation
-
+//TODO: create func that changes measure to unit and tsp and stuff used both in grocieres and detail view
 final class RecipesViewModel: ObservableObject {
     private let repository: RepositoryProtocol
                                           
@@ -19,7 +19,6 @@ final class RecipesViewModel: ObservableObject {
     init(repository: RepositoryProtocol) {
         self.repository = repository
         Task {
-            //TODO: change query to category if using popup or do popup as defualt instead of pasta
             await self.searchRecipes(query: "mediterranean")
         }
         loadSavedRecipesFromUserDefaults()
@@ -56,11 +55,11 @@ final class RecipesViewModel: ObservableObject {
         savedRecipes.append(recipe)
     }
     
-//    func removeSelectedAfterAdded(){
-//        selectedRecipes.forEach { recipe in
-//            recipe.isSelected = false
-//        }
-//    }
+    func removeSelectedAfterAdded(){
+        recipes.indices.forEach { index in
+            recipes[index].isSelected = false
+        }
+    }
 
     
     func deleteSavedRecipe(at offsets: IndexSet){

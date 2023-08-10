@@ -7,13 +7,11 @@
 
 import SwiftUI
 
-struct SplashView: View {
-//    @State var isActive: Bool = false
-    
+struct SplashView: View {    
     
     var body: some View {
         LottieView(loopMode: .loop)
-                    .scaleEffect(0.4)
+            .scaleEffect(0.4)
     }
 }
 

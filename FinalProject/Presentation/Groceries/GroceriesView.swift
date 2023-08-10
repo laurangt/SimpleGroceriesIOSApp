@@ -16,16 +16,15 @@ struct GroceriesView: View {
     
     // TODO: checkbox of each grocery not working rn all together
     // TODO: sometimes ingredients twice for one recipe then id problem what can i do - filter if already exist same name
-    // TODO: if empty display add recipe to get ingredients
     var body: some View {
         NavigationStack{
             if recipesViewModel.savedRecipes == [] {
                 EmptySavedRecipesPlaceholderView()
             } else {
                 List{
-                    ForEach(recipesViewModel.savedRecipes){ recipe in
+                    ForEach($recipesViewModel.savedRecipes){ $recipe in
                         //                    RecipeViewSection(recipe: recipe)
-                        GroceryCellView(recipe: recipe)
+                        GroceryCellView(recipe: $recipe)
                     }
                     .listRowSeparatorTint(Color("mainOrange"))
                 }.navigationTitle("My Groceries").navigationBarTitleDisplayMode(.inline)
@@ -45,67 +44,20 @@ struct GroceriesView_Previews: PreviewProvider {
     }
 }
 
-
-
-
-//// MARK: - Components
-//struct RecipeViewSection: View {
-//
-//    var recipe: LocalRecipe
-//    
-//    var body: some View {
-//        //TODO: change actual groceryState and save to db
-//        //TODO: checkbox for single item not all at once whe clicked
-//        Section {
-////            ForEach(recipe.localIngredients){ ingredient in
-////                GroceryCellView(ingredient: ingredient)
-////            }
-//        } header: {
-//            Text("\(recipe.label)")
-//        }
-//    }
-//}
-//
-//// MARK: - Components
-//struct GroceryCellView: View {
-//    @Binding var ingredient: LocalIngredient
-//    @State private var isChecked = false
-//
-//    var body: some View {
-//
-//        //TODO: change actual groceryState and save to db
-//        //TODO: checkbox for single item not all at once whe clicked
-//        HStack{
-//            CheckboxView(isChecked: $ingredient.isCompleted).foregroundColor(Color("mainOrange"))
-//            Text("\(ingredient.remoteIngredient.food)")
-//            Spacer()
-//            HStack{
-//                Text("\(String(format: "%.2f", ingredient.remoteIngredient.quantity))")
-//                Text("\(ingredient.remoteIngredient.measure ?? " ")")
-//            }
-//        }
-//        
-//    }
-//}
-
-
 //
 //// MARK: - Components
 struct GroceryCellView: View {
-    var recipe: LocalRecipe
+    @Binding var recipe: LocalRecipe
     @State private var isChecked = false
     
     var body: some View {
         
-        //TODO: change actual groceryState and save to db
-        //TODO: checkbox for single item not all at once whe clicked
+        //TODO: change actual groceryState and save to db save to db
         Section {
-            ForEach(recipe.localIngredients){ grocery in
+            ForEach($recipe.localIngredients){ $grocery in
                 HStack{
-                    Image(systemName: isChecked ? "checkmark.square.fill" : "square").foregroundColor(Color("mainOrange")).onTapGesture {
-                        isChecked.toggle()
-                    }
-                    Text("\(grocery.remoteIngredient.food)")
+                    CheckboxView(isChecked: $grocery.isCompleted).foregroundColor(Color("mainOrange"))
+                    Text("\(grocery.remoteIngredient.food.capitalized)")
                     Spacer()
                     HStack{
                         if String(format: "%.2f", grocery.remoteIngredient.quantity).hasSuffix(".00") {
