@@ -7,8 +7,7 @@
 
 import SwiftUI
 //TODO: splash here as overlay so pics load in background and are loaded when eaching this page play w times
-//TODO: delete search bar when enter
-//TODO:  capitalize all ingredients
+
 struct RecipesView: View {
 
    @ObservedObject var recipesViewModel: RecipesViewModel
@@ -108,7 +107,6 @@ struct RecipesView: View {
             .overlay(alignment: .bottom) {
                Button("Save recipes") {
                   recipesViewModel.filterSelectedRecipes()
-//                  recipesViewModel.loadSavedRecipesFromUserDefaults()
                   recipesViewModel.selectedRecipes.forEach { recipe in
                      recipesViewModel.addRecipeToSaved(recipe: recipe)
                   }

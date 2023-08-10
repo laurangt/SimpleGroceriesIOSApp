@@ -16,8 +16,8 @@ struct EmptySavedRecipesPlaceholderView: View {
     }
 }
 
-struct EmptySavedRecipesPlaceholderView_Previews: PreviewProvider {
-    static var previews: some View {
-        EmptySavedRecipesPlaceholderView()
-    }
-}
+//struct EmptySavedRecipesPlaceholderView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        EmptySavedRecipesPlaceholderView()
+//    }
+//}

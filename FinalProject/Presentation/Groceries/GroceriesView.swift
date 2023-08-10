@@ -14,25 +14,25 @@ struct GroceriesView: View {
         self.recipesViewModel = recipesViewModel
     }
     
-    // TODO: checkbox of each grocery not working rn all together
-    // TODO: sometimes ingredients twice for one recipe then id problem what can i do - filter if already exist same name
     var body: some View {
         NavigationStack{
             if recipesViewModel.savedRecipes == [] {
-                EmptySavedRecipesPlaceholderView()
+                VStack{
+                    EmptySavedRecipesPlaceholderView()
+                }.navigationTitle("My Groceries").navigationBarTitleDisplayMode(.inline)
             } else {
                 List{
                     ForEach($recipesViewModel.savedRecipes){ $recipe in
-                        //                    RecipeViewSection(recipe: recipe)
                         GroceryCellView(recipe: $recipe)
                     }
                     .listRowSeparatorTint(Color("mainOrange"))
                 }.navigationTitle("My Groceries").navigationBarTitleDisplayMode(.inline)
                     .onAppear {
-                        recipesViewModel.loadSavedRecipesFromUserDefaults()
+                        recipesViewModel.readSavedRecipesFromUserDefaults()
                     }
-                //                .scrollContentBackground(.hidden)
-                //                .background(.white)
+                    .onDisappear{
+                        recipesViewModel.saveSelectedRecipesToUserDefaults(recipes: recipesViewModel.savedRecipes)
+                    }
             }
         }
     }
@@ -44,15 +44,12 @@ struct GroceriesView_Previews: PreviewProvider {
     }
 }
 
-//
-//// MARK: - Components
+//MARK: COMPONENTS
 struct GroceryCellView: View {
     @Binding var recipe: LocalRecipe
     @State private var isChecked = false
     
     var body: some View {
-        
-        //TODO: change actual groceryState and save to db save to db
         Section {
             ForEach($recipe.localIngredients){ $grocery in
                 HStack{

@@ -48,6 +48,19 @@ final class RecipesViewModelTests: XCTestCase {
 
     }
 
+    func testRecipesViewModel_whenRemoveSelectedAfterAdded_expectRecipesNotSelected() {
+        //GIVEN
+        sut?.recipes = recipeStub.getStubSelectedNNotRecipes()
+        //WHEN
+        sut?.removeSelectedAfterAdded()
+
+        //THEN
+        sut?.recipes.forEach({ recipe in
+            XCTAssertTrue(recipe.isSelected == false)
+        })
+
+    }
+    
     
 //    func testRepository_whenGetRecipesWithInvalidQueryGetRecipesFail_expectEmptyRecipes() async throws {
 //        // GIVEN

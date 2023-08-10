@@ -6,7 +6,7 @@
 //
 
 import Foundation
-//TODO: create func that changes measure to unit and tsp and stuff used both in grocieres and detail view
+
 final class RecipesViewModel: ObservableObject {
     private let repository: RepositoryProtocol
                                           
@@ -21,7 +21,7 @@ final class RecipesViewModel: ObservableObject {
         Task {
             await self.searchRecipes(query: "mediterranean")
         }
-        loadSavedRecipesFromUserDefaults()
+        readSavedRecipesFromUserDefaults()
     }
 
     func searchRecipes(query: String) async {
@@ -36,7 +36,6 @@ final class RecipesViewModel: ObservableObject {
         }
     }
     
-//TODO: deselected if clicked on button
     func filterSelectedRecipes(){
         selectedRecipes = recipes.filter { $0.isSelected }
     }
@@ -45,7 +44,7 @@ final class RecipesViewModel: ObservableObject {
         UserDefaultsHelper.defaults.saveSelectedRecipesIntoUserDefaults(recipes: recipes)
     }
     
-    func loadSavedRecipesFromUserDefaults(){
+    func readSavedRecipesFromUserDefaults(){
         DispatchQueue.main.async {
             self.savedRecipes = UserDefaultsHelper.defaults.readSavedRecipesFromUserDefaults()
         }

@@ -12,13 +12,15 @@ struct SavedRecipesView: View {
     
     init(recipesViewModel: RecipesViewModel) {
         self.recipesViewModel = recipesViewModel
-        recipesViewModel.loadSavedRecipesFromUserDefaults()
+        recipesViewModel.readSavedRecipesFromUserDefaults()
     }
     
     var body: some View {
         NavigationStack{
             if recipesViewModel.savedRecipes.isEmpty {
-                EmptySavedRecipesPlaceholderView()
+                VStack{
+                    EmptySavedRecipesPlaceholderView()
+                }.navigationTitle("Saved Recipes").navigationBarTitleDisplayMode(.inline)
             } else {
                 
                 List{
@@ -33,7 +35,7 @@ struct SavedRecipesView: View {
                     .listRowSeparatorTint(Color("mainOrange"))
                 }
                 .onAppear(perform: {
-                    recipesViewModel.loadSavedRecipesFromUserDefaults()
+                    recipesViewModel.readSavedRecipesFromUserDefaults()
                 })
                 .navigationTitle("Saved Recipes").navigationBarTitleDisplayMode(.inline)
             }

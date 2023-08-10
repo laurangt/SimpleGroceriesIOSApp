@@ -33,7 +33,7 @@ final class UserDefaultsHelperTests: XCTestCase {
 
         // THEN
         
-        XCTAssertNotNil(readRecipes)
+        XCTAssertEqual(readRecipes, recipes)
     }
     
 //    func testUserDefaultsHelper_whenReadRecipesWrong_expectEmpty() {
