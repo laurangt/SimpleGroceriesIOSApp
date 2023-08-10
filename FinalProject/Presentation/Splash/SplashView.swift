@@ -7,25 +7,11 @@
 
 import SwiftUI
 
-struct SplashView: View {
-    @State var isActive: Bool = false
-    
+struct SplashView: View {    
     
     var body: some View {
-        ZStack {
-            if self.isActive {
-                GroceriesView()
-            } else {
-                Text("hi this is splash")
-            }
-        }
-        .onAppear {
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
-                withAnimation {
-                    self.isActive = true
-                }
-            }
-        }
+        LottieView(loopMode: .loop)
+            .scaleEffect(0.4)
     }
 }
 

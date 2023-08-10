@@ -8,50 +8,77 @@
 import SwiftUI
 
 struct GroceriesView: View {
-    var groceryList = [
-        Grocery(ingredient: "Linguine", amount: 200, unit: "g"),
-        Grocery(ingredient: "Eggs", amount: 4, unit: ""),
-        Grocery(ingredient: "Pancetta", amount: 200, unit: "g"),
-        Grocery(ingredient: "Pesto", amount: 50, unit: "g"),
-        Grocery(ingredient: "Fusili", amount: 250, unit: "g"),
-        Grocery(ingredient: "Cheese", amount: 200, unit: "g")
-    ]
-
+    @ObservedObject var recipesViewModel: RecipesViewModel
+    
+    init(recipesViewModel: RecipesViewModel) {
+        self.recipesViewModel = recipesViewModel
+    }
+    
     var body: some View {
         NavigationStack{
-            List{
-                ForEach(groceryList){ grocery in
-                    GroceryCellView(grocery: grocery)
-                }.listRowSeparatorTint(Color("mainOrange"))
-            }.navigationTitle("Groceries")
+            if recipesViewModel.savedRecipes == [] {
+                VStack{
+                    EmptySavedRecipesPlaceholderView()
+                }.navigationTitle("My Groceries").navigationBarTitleDisplayMode(.inline)
+            } else {
+                List{
+                    ForEach($recipesViewModel.savedRecipes){ $recipe in
+                        GroceryCellView(recipe: $recipe)
+                    }
+                    .listRowSeparatorTint(Color("mainOrange"))
+                }.navigationTitle("My Groceries").navigationBarTitleDisplayMode(.inline)
+                    .onAppear {
+                        recipesViewModel.readSavedRecipesFromUserDefaults()
+                    }
+                    .onDisappear{
+                        recipesViewModel.saveSelectedRecipesToUserDefaults(recipes: recipesViewModel.savedRecipes)
+                    }
+            }
         }
     }
 }
 
 struct GroceriesView_Previews: PreviewProvider {
     static var previews: some View {
-        GroceriesView()
+        GroceriesView(recipesViewModel: RecipesViewModel(repository: RepositoryImpl(remoteDataSource: RemoteDataSourceImpl())))
     }
 }
 
-// MARK: - Components
+//MARK: COMPONENTS
 struct GroceryCellView: View {
-    var grocery: Grocery
+    @Binding var recipe: LocalRecipe
     @State private var isChecked = false
     
     var body: some View {
-        HStack{
-            //TODO: change actual groceryState
-            Image(systemName: isChecked ? "checkmark.square.fill" : "square").foregroundColor(Color("mainOrange")).onTapGesture {
-                isChecked.toggle()
+        Section {
+            ForEach($recipe.localIngredients){ $grocery in
+                HStack{
+                    CheckboxView(isChecked: $grocery.isCompleted).foregroundColor(Color("mainOrange"))
+                    Text("\(grocery.remoteIngredient.food.capitalized)")
+                    Spacer()
+                    HStack{
+                        if String(format: "%.2f", grocery.remoteIngredient.quantity).hasSuffix(".00") {
+                            Text("\(String(format: "%.0f", grocery.remoteIngredient.quantity))")
+                        } else {
+                            Text("\(String(format: "%.2f", grocery.remoteIngredient.quantity))")
+                        }
+                        
+                        if grocery.remoteIngredient.measure == "<unit>" {
+                            Text("unit")
+                        } else if grocery.remoteIngredient.measure == "teaspoon" {
+                            Text("tsp")
+                        } else if grocery.remoteIngredient.measure == "tablespoon" {
+                            Text("tbsp")
+                        } else if grocery.remoteIngredient.measure == "pound" {
+                            Text("lb")
+                        } else {
+                            Text("\(grocery.remoteIngredient.measure ?? "")")
+                        }
+                    }
+                }
             }
-            Text("\(grocery.ingredient)")
-            Spacer()
-            HStack{
-                Text("\(grocery.amount)")
-                Text("\(grocery.unit)")
-            }
+        } header: {
+            Text("\(recipe.label)")
         }
     }
 }
-

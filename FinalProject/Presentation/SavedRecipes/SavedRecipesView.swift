@@ -8,44 +8,64 @@
 import SwiftUI
 
 struct SavedRecipesView: View {
+    @ObservedObject var recipesViewModel: RecipesViewModel
     
-    //TODO: Change for recipes saved
-    var groceryList = [
-        Grocery(ingredient: "Linguine", amount: 200, unit: "g"),
-        Grocery(ingredient: "Eggs", amount: 4, unit: ""),
-        Grocery(ingredient: "Pancetta", amount: 200, unit: "g")
-    ]
+    init(recipesViewModel: RecipesViewModel) {
+        self.recipesViewModel = recipesViewModel
+        recipesViewModel.readSavedRecipesFromUserDefaults()
+    }
     
-    //TODO: ondelete: delete
     var body: some View {
         NavigationStack{
-            List{
-                ForEach(groceryList){ savedRecipe in
-                    SavedRecipeCell()
-                }.listRowSeparatorTint(Color("mainOrange"))
-            }.navigationTitle("My saved Recipes")
+            if recipesViewModel.savedRecipes.isEmpty {
+                VStack{
+                    EmptySavedRecipesPlaceholderView()
+                }.navigationTitle("Saved Recipes").navigationBarTitleDisplayMode(.inline)
+            } else {
+                
+                List{
+                    ForEach(recipesViewModel.savedRecipes){ savedRecipe in
+                        NavigationLink {
+                            RecipeDetailView(recipe: savedRecipe)
+                        } label: {
+                            SavedRecipeCell(savedRecipe: savedRecipe)
+                        }
+                    }
+                    .onDelete(perform: recipesViewModel.deleteSavedRecipe)
+                    .listRowSeparatorTint(Color("mainOrange"))
+                }
+                .onAppear(perform: {
+                    recipesViewModel.readSavedRecipesFromUserDefaults()
+                })
+                .navigationTitle("Saved Recipes").navigationBarTitleDisplayMode(.inline)
+            }
         }
+        
     }
 }
 
 struct SavedRecipesView_Previews: PreviewProvider {
     static var previews: some View {
-        SavedRecipesView()
+        SavedRecipesView(recipesViewModel: RecipesViewModel(repository: RepositoryImpl(remoteDataSource: RemoteDataSourceImpl())))
     }
 }
 
 
 struct SavedRecipeCell: View{
-//    var savedRecipe: SavedRecipe
+    var savedRecipe: LocalRecipe
     
     var body: some View {
         HStack{
-            Image("carbonara").resizable().frame(width: 100, height: 80).cornerRadius(15).scaledToFit()
-            VStack{
-                Text("SavedRecipe.name")
-                Text("SavedRecipe.servings")
-                Text("SavedRecipe.cookingtime")
-            }
+            AsyncImage(url: savedRecipe.image ?? URL(string: ""),
+                       content: { image in
+                image.resizable()
+                    .aspectRatio(contentMode: .fill)
+                    .frame(width: 100, height: 80)
+                    .cornerRadius(15)
+            }, placeholder: {
+                ProgressView().frame(width: 100, height: 80)
+            }).accessibilityAddTraits(.isImage).accessibilityLabel("Image of recipe")
+            Text("\(savedRecipe.label)")
         }
     }
 }
