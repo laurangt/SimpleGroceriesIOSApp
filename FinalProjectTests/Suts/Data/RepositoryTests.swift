@@ -36,7 +36,6 @@ final class RepositoryTests: XCTestCase {
         XCTAssertEqual(recipes!.count, 1)
     }
 
-//    TODO: map function
     func testRepository_whenMapperRecipeModel_expectLocalRecipe() {
         // GIVEN
         let recipes = [recipeStub.getStubRecipeRecipeModel()]

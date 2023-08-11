@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		D601114E2A7F8722003E57DF /* UserDefaultsHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D601114D2A7F8722003E57DF /* UserDefaultsHelper.swift */; };
-		D60111562A813231003E57DF /* RemoteDataSourceTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = D60111552A813231003E57DF /* RemoteDataSourceTest.swift */; };
 		D601115A2A81352E003E57DF /* MockRemoteDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = D60111592A81352E003E57DF /* MockRemoteDataSource.swift */; };
 		D60111672A8140FA003E57DF /* RepositoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D60111662A8140FA003E57DF /* RepositoryTests.swift */; };
 		D601116A2A81443F003E57DF /* UserDefaultsHelperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D60111692A81443F003E57DF /* UserDefaultsHelperTests.swift */; };
@@ -66,7 +65,6 @@
 
 /* Begin PBXFileReference section */
 		D601114D2A7F8722003E57DF /* UserDefaultsHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsHelper.swift; sourceTree = "<group>"; };
-		D60111552A813231003E57DF /* RemoteDataSourceTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteDataSourceTest.swift; sourceTree = "<group>"; };
 		D60111592A81352E003E57DF /* MockRemoteDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockRemoteDataSource.swift; sourceTree = "<group>"; };
 		D60111662A8140FA003E57DF /* RepositoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositoryTests.swift; sourceTree = "<group>"; };
 		D60111692A81443F003E57DF /* UserDefaultsHelperTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsHelperTests.swift; sourceTree = "<group>"; };
@@ -140,7 +138,6 @@
 				D601115B2A8139FC003E57DF /* Data */,
 				D601115E2A813A26003E57DF /* Domain */,
 				D601115F2A813A2A003E57DF /* Presentation */,
-				D601115D2A813A24003E57DF /* App */,
 			);
 			path = Suts;
 			sourceTree = "<group>";
@@ -159,26 +156,10 @@
 		D601115B2A8139FC003E57DF /* Data */ = {
 			isa = PBXGroup;
 			children = (
-				D60111682A814431003E57DF /* Utils */,
-				D601115C2A813A00003E57DF /* DataSource */,
 				D60111662A8140FA003E57DF /* RepositoryTests.swift */,
+				D60111682A814431003E57DF /* Utils */,
 			);
 			path = Data;
-			sourceTree = "<group>";
-		};
-		D601115C2A813A00003E57DF /* DataSource */ = {
-			isa = PBXGroup;
-			children = (
-				D60111552A813231003E57DF /* RemoteDataSourceTest.swift */,
-			);
-			path = DataSource;
-			sourceTree = "<group>";
-		};
-		D601115D2A813A24003E57DF /* App */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = App;
 			sourceTree = "<group>";
 		};
 		D601115E2A813A26003E57DF /* Domain */ = {
@@ -638,7 +619,6 @@
 				D601115A2A81352E003E57DF /* MockRemoteDataSource.swift in Sources */,
 				D6FD7F362A8236580034F0DD /* NetworkFetchingMock.swift in Sources */,
 				D60111712A8148A2003E57DF /* RecipeResultModelTests.swift in Sources */,
-				D60111562A813231003E57DF /* RemoteDataSourceTest.swift in Sources */,
 				D6C3464A2A83A797006113F5 /* IngredientStub.swift in Sources */,
 				D601116A2A81443F003E57DF /* UserDefaultsHelperTests.swift in Sources */,
 				D6FD7F382A823C8E0034F0DD /* URLProtocolMock.swift in Sources */,

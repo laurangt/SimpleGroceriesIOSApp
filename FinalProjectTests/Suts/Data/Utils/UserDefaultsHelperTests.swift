@@ -28,11 +28,8 @@ final class UserDefaultsHelperTests: XCTestCase {
         let recipes = [recipeStub.getStubRecipeLocalRecipe()]
         // WHEN
         sut?.saveSelectedRecipesIntoUserDefaults(recipes: recipes)
-        
         let readRecipes = sut?.readSavedRecipesFromUserDefaults()
-
         // THEN
-        
         XCTAssertEqual(readRecipes, recipes)
     }
     
