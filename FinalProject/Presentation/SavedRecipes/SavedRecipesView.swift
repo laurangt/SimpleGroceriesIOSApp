@@ -19,10 +19,9 @@ struct SavedRecipesView: View {
         NavigationStack{
             if recipesViewModel.savedRecipes.isEmpty {
                 VStack{
-                    EmptySavedRecipesPlaceholderView()
+                    EmptyViewPlaceholderComponent()
                 }.navigationTitle("Saved Recipes").navigationBarTitleDisplayMode(.inline)
             } else {
-                
                 List{
                     ForEach(recipesViewModel.savedRecipes){ savedRecipe in
                         NavigationLink {
@@ -56,15 +55,7 @@ struct SavedRecipeCell: View{
     
     var body: some View {
         HStack{
-            AsyncImage(url: savedRecipe.image ?? URL(string: ""),
-                       content: { image in
-                image.resizable()
-                    .aspectRatio(contentMode: .fill)
-                    .frame(width: 100, height: 80)
-                    .cornerRadius(15)
-            }, placeholder: {
-                ProgressView().frame(width: 100, height: 80)
-            }).accessibilityAddTraits(.isImage).accessibilityLabel("Image of recipe")
+            AsyncImageComponent(url: savedRecipe.image, width: 100, height: 80, accessibilitydescription: "recipe")
             Text("\(savedRecipe.label)")
         }
     }

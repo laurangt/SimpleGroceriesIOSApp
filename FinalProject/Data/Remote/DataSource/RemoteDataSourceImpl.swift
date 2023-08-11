@@ -27,11 +27,9 @@ final class RemoteDataSourceImpl: RemoteDataSourceProtocol {
             throw NetworkError.malformedURL
         }
 
-        // URL request
         var urlRequest = URLRequest(url: url)
         urlRequest.httpMethod = "GET"
         
-        // Get fetched data
         let (data, response) = try await session.data(url: urlRequest)
         guard let response = response as? HTTPURLResponse, response.statusCode == 200 else {
             throw NetworkError.invalidResponse

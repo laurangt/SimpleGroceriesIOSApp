@@ -18,16 +18,7 @@ struct RecipeDetailView: View {
     
     var body: some View {
         VStack(alignment: .leading){
-            AsyncImage(url: recipe.image ?? URL(string: ""),
-                       content: { image in
-                image.resizable()
-                    .aspectRatio(contentMode: .fill)
-                    .frame(height: 300)
-                    .cornerRadius(15)
-            }, placeholder: {
-                ProgressView().frame(height: 300)
-                    .cornerRadius(15)
-            }).accessibilityAddTraits(.isImage).accessibilityLabel("Image of recipe")
+            AsyncImageComponent(url: recipe.image, width: nil, height: 300, accessibilitydescription: "recipe")
             ScrollView{
                 VStack(alignment: .leading){
                     Text("\(recipe.label)".capitalized).font(.title2)
@@ -37,14 +28,7 @@ struct RecipeDetailView: View {
                     ScrollView(.horizontal){
                         HStack{
                             ForEach(recipe.localIngredients, id: \.id) { ingredient in
-                                AsyncImage(url: ingredient.remoteIngredient.image ?? URL(string: ""),
-                                           content: { image in
-                                    image.resizable()
-                                        .aspectRatio(contentMode: .fill)
-                                        .frame(width: 60, height: 60).cornerRadius(15)
-                                }, placeholder: {
-                                    ProgressView().frame(width: 50, height: 50)
-                                }).accessibilityLabel("\(ingredient.remoteIngredient.food)").accessibilityAddTraits(.isImage)
+                                AsyncImageComponent(url: ingredient.remoteIngredient.image, width: 60, height: 60, accessibilitydescription: "\(ingredient.remoteIngredient.food)")
                             }
                         }
                     }

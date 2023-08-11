@@ -14,9 +14,3 @@ struct SplashView: View {
             .scaleEffect(0.4)
     }
 }
-
-struct SplashView_Previews: PreviewProvider {
-    static var previews: some View {
-        SplashView()
-    }
-}

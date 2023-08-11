@@ -9,7 +9,6 @@ import SwiftUI
 
 struct RootView: View {
     let recipeViewModel = RecipesViewModel(repository: RepositoryImpl(remoteDataSource: RemoteDataSourceImpl()))
-    
     @State var isActive: Bool = false
 
     var body: some View {
@@ -42,8 +41,3 @@ struct RootView: View {
     }
 }
 
-struct ContentView_Previews: PreviewProvider {
-    static var previews: some View {
-        RootView()
-    }
-}

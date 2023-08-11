@@ -33,20 +33,11 @@ struct RecipesView: View {
    var body: some View {
       NavigationStack{
          if recipeAddedBanner {
-            RoundedRectangle(cornerRadius: 15)
-               .fill(Color("mainOrange"))
-             .frame(
-               width: UIScreen.main.bounds.width * 0.9,
-               height: 50
-             )
-             .transition(.asymmetric(
-               insertion: .move(edge: .top),
-               removal: .move(edge: .top)
-             ))
-             .overlay {
+            BannerComponent()
+               .overlay {
                 recipesViewModel.selectedRecipes.count == 1 ? Text("\(recipesViewModel.selectedRecipes.count) recipe saved").foregroundColor(.white) : Text("\(recipesViewModel.selectedRecipes.count) recipes saved").foregroundColor(.white)
-             }
-             .onAppear {
+               }
+               .onAppear {
                 DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
                     self.recipeAddedBanner.toggle()
                 }
@@ -72,16 +63,13 @@ struct RecipesView: View {
                                  } label: {
                                     Text("\(cuisineType)").foregroundColor(.white).font(.callout)
                                  }
-
                               }
-                              
                            }
                         }.frame(height: 100)
                      }
                   }
                }
                ScrollView {
-                  
                   LazyVGrid(columns: columns) {
                      ForEach(recipesViewModel.recipes.indices, id: \.self){ index in
                         NavigationLink {
@@ -100,7 +88,6 @@ struct RecipesView: View {
                      }
                      recipeQuery = ""
                   }
-                  
                }
             }
             .padding()
@@ -115,7 +102,8 @@ struct RecipesView: View {
                   recipesViewModel.removeSelectedAfterAdded()
                }
                .frame(height: 40)
-               .padding(EdgeInsets(top: 10, leading: 0, bottom: 40, trailing: 0)).buttonStyle(.borderedProminent)
+               .padding(EdgeInsets(top: 0, leading: 0, bottom: 40, trailing: 0))
+               .buttonStyle(.borderedProminent)
                .tint(Color("mainOrange"))
                .accessibilityLabel("Submit button: Save selected Recipes")
                .accessibilityAddTraits(.isButton)
@@ -134,24 +122,13 @@ struct RecipesView_Previews: PreviewProvider {
 }
 
 
-
 struct RecipeComponent: View {
-
    @Binding var recipe: LocalRecipe
    
    var body: some View {
       ZStack {
          VStack{
-            AsyncImage(url: recipe.image ?? URL(string: ""),
-                       content: { image in
-               image.resizable()
-                  .aspectRatio(contentMode: .fill)
-                  .frame(width: 170, height: 110)
-                  .cornerRadius(15)
-            }, placeholder: {
-               ProgressView().frame(width: 170, height: 110)
-            }).accessibilityAddTraits(.isImage).accessibilityLabel("Image of recipe")
-            
+            AsyncImageComponent(url: recipe.image, width: 170, height: 110, accessibilitydescription: "recipe")
             HStack(alignment: .center){
                Text("\(recipe.label)").font(.subheadline).foregroundColor(Color("assetBlack")).lineLimit(2).padding(3)
                CheckboxView(isChecked: $recipe.isSelected).foregroundColor(Color("mainOrange"))
