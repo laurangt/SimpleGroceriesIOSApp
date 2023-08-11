@@ -26,6 +26,4 @@ final class MockRemoteDataSource: RemoteDataSourceProtocol {
             return []
         }
     }
-    
-   
 }
