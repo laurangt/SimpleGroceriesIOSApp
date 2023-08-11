@@ -36,13 +36,4 @@ final class UserDefaultsHelperTests: XCTestCase {
         XCTAssertEqual(readRecipes, recipes)
     }
     
-//    func testUserDefaultsHelper_whenReadRecipesWrong_expectEmpty() {
-//        // GIVEN
-//        let recipes: [LocalRecipe] = []
-//        sut?.saveSelectedRecipesIntoUserDefaults(recipes: recipes)
-//        // WHEN
-//        let readRecipes = sut?.readSavedRecipesFromUserDefaults()
-//        // THEN
-//        XCTAssertEqual(readRecipes, [])
-//    }
 }

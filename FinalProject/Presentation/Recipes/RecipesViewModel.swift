@@ -24,6 +24,7 @@ final class RecipesViewModel: ObservableObject {
         readSavedRecipesFromUserDefaults()
     }
 
+    //MARK: - Fetch method
     func searchRecipes(query: String) async {
         guard let recipesFromApi = try? await repository.getRecipes(query: query) else {
             self.recipes = []
@@ -36,18 +37,18 @@ final class RecipesViewModel: ObservableObject {
         }
     }
     
-    func filterSelectedRecipes(){
-        selectedRecipes = recipes.filter { $0.isSelected }
-    }
-    
+    // MARK: - UserDefaults methods
     func saveSelectedRecipesToUserDefaults(recipes: [LocalRecipe]){
         UserDefaultsHelper.defaults.saveSelectedRecipesIntoUserDefaults(recipes: recipes)
     }
     
     func readSavedRecipesFromUserDefaults(){
-        DispatchQueue.main.async {
-            self.savedRecipes = UserDefaultsHelper.defaults.readSavedRecipesFromUserDefaults()
-        }
+        savedRecipes = UserDefaultsHelper.defaults.readSavedRecipesFromUserDefaults()
+    }
+    
+    //MARK: - CRUD methods
+    func filterSelectedRecipes(){
+        selectedRecipes = recipes.filter { $0.isSelected }
     }
     
     func addRecipeToSaved(recipe: LocalRecipe) {
@@ -60,12 +61,10 @@ final class RecipesViewModel: ObservableObject {
         }
     }
 
-    
     func deleteSavedRecipe(at offsets: IndexSet){
         savedRecipes.remove(atOffsets: offsets)
         saveSelectedRecipesToUserDefaults(recipes: savedRecipes)
     }
-
 
 }
 

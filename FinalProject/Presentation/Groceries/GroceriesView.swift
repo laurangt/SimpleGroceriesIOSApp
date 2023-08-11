@@ -18,7 +18,7 @@ struct GroceriesView: View {
         NavigationStack{
             if recipesViewModel.savedRecipes == [] {
                 VStack{
-                    EmptySavedRecipesPlaceholderView()
+                    EmptyViewPlaceholderComponent()
                 }.navigationTitle("My Groceries").navigationBarTitleDisplayMode(.inline)
             } else {
                 List{
@@ -27,20 +27,14 @@ struct GroceriesView: View {
                     }
                     .listRowSeparatorTint(Color("mainOrange"))
                 }.navigationTitle("My Groceries").navigationBarTitleDisplayMode(.inline)
-                    .onAppear {
-                        recipesViewModel.readSavedRecipesFromUserDefaults()
-                    }
-                    .onDisappear{
-                        recipesViewModel.saveSelectedRecipesToUserDefaults(recipes: recipesViewModel.savedRecipes)
-                    }
+                .onAppear {
+                    recipesViewModel.readSavedRecipesFromUserDefaults()
+                }
+                .onDisappear{
+                    recipesViewModel.saveSelectedRecipesToUserDefaults(recipes: recipesViewModel.savedRecipes)
+                }
             }
         }
-    }
-}
-
-struct GroceriesView_Previews: PreviewProvider {
-    static var previews: some View {
-        GroceriesView(recipesViewModel: RecipesViewModel(repository: RepositoryImpl(remoteDataSource: RemoteDataSourceImpl())))
     }
 }
 
